@@ -11,8 +11,8 @@ window.DATA = {
     yearsOfWork: '15 million'   // 816.9e9 / 52,800 = 15.5 million years
   },
 
-  // Rhythm: a new text at least every ~4.5 desktop screens.
-  rhythm: { maxGapPx: 6500, minGapPx: 2400 },
+  // Rhythm, in screens: a new text at least every 4.5 screens, never closer than 1.7.
+  rhythm: { maxScreens: 4.5, minScreens: 1.7 },
 
   // Base numbers for the computed progress cards (all sourced below).
   base: {
@@ -39,7 +39,7 @@ window.DATA = {
     spend: [
       '{blockTitle}. This block is drawn to scale too.',
       'And he still has {leftHere}.',
-      'Every pixel of this dark block is $500,000 put to work.'
+      'Every pixel you scroll through this dark block is {perPx} put to work.'
     ],
     tail: [
       'Everything in this bar that is not dark red is still his.',
@@ -57,7 +57,7 @@ window.DATA = {
       { title: 'Spend a million a day', html: 'If he spent $1 million every single day and earned nothing more, the money would last about 2,240 years.' },
       { title: 'Save a thousand a day', html: 'Put $1,000 aside every day. To reach his fortune you would need about 2.2 million years.' },
       { title: 'Share it with everyone', html: 'Split evenly over all 8.2 billion people on Earth, it comes to about $100 each. [[wb-pip]] For one person, it is all of that at once.' },
-      { title: 'A million is not a billion', html: 'A million dollars is a square of 32 by 32 pixels. A billion is a block of 2,000 by 500. This bar holds 817 of those blocks.' }
+      { title: 'A million is not a billion', html: 'A million dollars is a square of 32 by 32 pixels. A billion is a block of {blockDims}. This bar holds 817 of those blocks.' }
     ] }
   ],
 
@@ -67,12 +67,12 @@ window.DATA = {
     { usd: 52800, label: 'A year of pay for a typical full-time worker in Belgium, before tax [[statbel]]', value: '~$52,800' },
     { usd: 395000, label: 'An average house in Belgium [[fednot]]', value: '~$395,000' },
     { usd: 2060000, label: 'A whole working life in Belgium: 35.7 years of typical pay [[eurostat]]', value: '~$2.06 million' },
-    { usd: 1e9, label: 'One billion dollars. Keep this block in mind.', value: '$1,000,000,000', inside: '2,000 pixels wide' }
+    { usd: 1e9, label: 'One billion dollars. Keep this block in mind.', value: '$1,000,000,000', inside: '{blockLen}' }
   ],
 
   story: [
-    { at: 0.6e9, type: 'note', title: 'Every 10 pixels you scroll is $5 million.',
-      html: 'That is more than two Belgian working lives, gone in a flick of your thumb.' },
+    { at: 0.6e9, type: 'note', title: 'Every 10 pixels you scroll is {perTen}.',
+      html: 'That is {livesPerTen} Belgian working lives, gone in a flick of your thumb. [[eurostat]]' },
 
     { at: 2.72e9, type: 'milestone', title: "Belgium's development aid", value: '$2.72 billion, all of 2025',
       html: 'Everything Belgium spent on aid to other countries in a year. [[oda]]' },
@@ -190,7 +190,7 @@ window.DATA = {
       share: true, linkText: 'Share the link' }
   ],
 
-  method: `One pixel is $1,000. The bars are 500 pixels tall, so each pixel you scroll sideways is $500,000. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
+  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
 
   sources: [
     { id: 'forbes-rt', text: 'Forbes Real-Time Billionaires, snapshot 25 November 2026, 06:50 UTC.', url: 'https://www.forbes.com/real-time-billionaires/' },

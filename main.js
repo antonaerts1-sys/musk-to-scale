@@ -2,9 +2,19 @@
   'use strict';
 
   var D = window.DATA;
+  var root = document.documentElement;
+  // Two layouts, one scale. Desktop: the bar runs sideways and is 500 px tall.
+  // Phones and touch screens: the bar runs downwards and is as wide as the
+  // screen, so you scroll the way your thumb expects. 1 px is $1,000 in both.
+  var V = root.classList.contains('v');
   var PX_USD = 1000;          // one pixel is $1,000
-  var BAR_H = 500;            // bar height in px
-  var USD_PER_X = PX_USD * BAR_H; // one horizontal pixel of the bar = $500,000
+  var BAR_T = V ? Math.max(240, Math.min(500, Math.floor(root.clientWidth - 32))) : 500; // bar thickness
+  var USD_PER_X = PX_USD * BAR_T; // one pixel along the bar
+  root.style.setProperty('--bar-t', BAR_T + 'px');
+  function place(n, start, len) {
+    if (V) { n.style.top = start + 'px'; n.style.height = len + 'px'; }
+    else { n.style.left = start + 'px'; n.style.width = len + 'px'; }
+  }
 
   var money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
@@ -30,7 +40,7 @@
         var n = srcIndex[id] || (srcIndex[id] = ++srcCount);
         return '<sup><a href="#src-' + id + '" aria-label="Source ' + n + '">' + n + '</a></sup>';
       })
-      .replace(/\{([a-zA-Z]+)\}/g, function (m, k) { return tokens[k] != null ? tokens[k] : m; });
+      .replace(/\{([a-zA-Z0-9]+)\}/g, function (m, k) { return tokens[k] != null ? tokens[k] : m; });
   }
 
   function short(usd) {
@@ -51,10 +61,20 @@
   tokens.remaining = short(remaining);
   tokens.spentPct = (spent / D.netWorth * 100).toFixed(0) + '%';
   tokens.asOf = D.asOf;
+  tokens.perTen = short(10 * USD_PER_X);
+  tokens.livesPerTen = (10 * USD_PER_X / ((D.base || {}).lifetime || 2060000)).toFixed(1);
+  tokens.perPx = money.format(USD_PER_X);
+  tokens.barT = BAR_T;
+  tokens.blockDims = V ? BAR_T + ' by ' + Math.round(1e6 / BAR_T).toLocaleString('en-US') : Math.round(1e6 / BAR_T).toLocaleString('en-US') + ' by ' + BAR_T;
+  tokens.blockLen = Math.round(1e6 / BAR_T).toLocaleString('en-US') + (V ? ' pixels tall' : ' pixels wide');
+  tokens.thickWord = V ? 'wide' : 'tall';
+  tokens.dirWord = V ? 'down' : 'sideways';
   Object.keys(D.tokens || {}).forEach(function (k) { tokens[k] = D.tokens[k]; });
 
   // ---- headline ----
   document.querySelectorAll('[data-fill="headline"]').forEach(function (n) { n.textContent = short(D.netWorth) + '.'; });
+  var hint = document.querySelector('.scroll-hint span');
+  if (hint && V) hint.innerHTML = '&#8595;';
 
   // ---- calibration ----
   var cal = document.getElementById('calibration');
@@ -64,8 +84,8 @@
     if (c.usd >= 1e9) {
       // big amounts are drawn as a block as tall as the bar
       item.classList.add('wide');
-      shape.style.width = Math.round(x(c.usd)) + 'px';
-      shape.style.height = BAR_H + 'px';
+      shape.style.width = (V ? BAR_T : Math.round(x(c.usd))) + 'px';
+      shape.style.height = (V ? Math.round(x(c.usd)) : BAR_T) + 'px';
       shape.innerHTML = fill(c.inside || '');
     } else {
       var s = side(c.usd);
@@ -82,8 +102,8 @@
 
   // ---- the bar ----
   var bar = document.getElementById('bar');
-  var barW = Math.round(x(D.netWorth));
-  bar.style.width = barW + 'px';
+  var barLen = Math.round(x(D.netWorth));
+  if (V) bar.style.height = barLen + 'px'; else bar.style.width = barLen + 'px';
 
   // ---- what lives inside the bar ----
   // Everything in the bar is an "item" at a dollar position. Each item owns the
@@ -92,9 +112,11 @@
   //   1. fixed: milestones, notes and the start of each spending block (data.js)
   //   2. chapter cards: short explainers, spread evenly over their chapter's range
   //   3. progress cards: computed "so far" lines that fill any long silence
+  // rhythm is measured in screens, so it feels the same on a phone and a laptop
   var RH = D.rhythm || {};
-  var MAX_GAP = RH.maxGapPx || 6500;   // never longer than this without a new text
-  var MIN_GAP = RH.minGapPx || 2400;   // texts never closer than this
+  var screen = V ? window.innerHeight : window.innerWidth;
+  var MAX_GAP = (RH.maxScreens || 4.5) * screen;   // never longer than this without a new text
+  var MIN_GAP = (RH.minScreens || 1.7) * screen;   // texts never closer than this
   var all = [];
 
   // spending blocks: dark backgrounds, plus an intro item at the start of each
@@ -102,8 +124,7 @@
   D.spending.forEach(function (s, i) {
     var from = spendTo, to = spendTo + s.usd;
     var seg = el('div', 'seg' + (i % 2 ? ' alt' : ''));
-    seg.style.left = Math.round(x(from)) + 'px';
-    seg.style.width = Math.max(2, Math.round(x(s.usd))) + 'px';
+    place(seg, Math.round(x(from)), Math.max(2, Math.round(x(s.usd))));
     bar.appendChild(seg);
     all.push({ at: from, kind: 'seg', s: s, fixed: true });
     spread(s.cards || [], from, to, s.title);
@@ -177,13 +198,12 @@
   all.forEach(function (it, i) {
     var s = it.s || {};
     var next = all[i + 1] ? all[i + 1].at : D.netWorth;
-    var left = Math.round(x(it.at));
-    var width = Math.max(40, Math.round(x(next)) - left);
+    var start = Math.round(x(it.at));
+    var len = Math.max(40, Math.round(x(next)) - start);
     tokens.here = (it.at / D.netWorth * 100).toFixed(1) + '%';
 
     var zone = el('div', 'zone zone-' + it.kind);
-    zone.style.left = left + 'px';
-    zone.style.width = width + 'px';
+    place(zone, start, len);
     var inner = el('div', 'zone-inner');
 
     if (it.kind === 'progress') {
@@ -224,7 +244,7 @@
   var ruler = document.getElementById('ruler');
   for (var v = 10e9; v < D.netWorth; v += 10e9) {
     var rl = el('div', 'ruler-label', '$' + (v / 1e9) + 'B');
-    rl.style.left = Math.round(x(v)) + 'px';
+    if (V) rl.style.top = Math.round(x(v)) + 'px'; else rl.style.left = Math.round(x(v)) + 'px';
     ruler.appendChild(rl);
   }
 
@@ -293,13 +313,19 @@
   var progFill = document.querySelector('.hud-progress-fill');
   var ticking = false;
 
-  function barLeft() { return bar.getBoundingClientRect().left + window.scrollX; }
-  var bl = barLeft();
-  window.addEventListener('resize', function () { bl = barLeft(); update(); });
+  function barStart() {
+    var r = bar.getBoundingClientRect();
+    return V ? r.top + window.scrollY : r.left + window.scrollX;
+  }
+  var bl = barStart();
+  window.addEventListener('resize', function () { bl = barStart(); update(); });
+  // switching between phone and desktop layout needs a fresh layout
+  var mq = window.matchMedia(window.LAYOUT_QUERY || '(max-width: 760px), (pointer: coarse)');
+  if (mq.addEventListener) mq.addEventListener('change', function () { location.reload(); });
 
   function update() {
     ticking = false;
-    var pos = window.scrollX + window.innerWidth * 0.5 - bl;
+    var pos = V ? window.scrollY + window.innerHeight * 0.5 - bl : window.scrollX + window.innerWidth * 0.5 - bl;
     if (pos <= 0) { counter.textContent = ''; prog.classList.remove('on'); return; }
     var usd = Math.min(D.netWorth, pos * USD_PER_X);
     counter.textContent = money.format(Math.round(usd / 1e6) * 1e6);
@@ -311,7 +337,7 @@
   }, { passive: true });
 
   // a vertical mouse wheel moves the page sideways, unless a section scrolls itself
-  window.addEventListener('wheel', function (e) {
+  if (!V) window.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
     var t = e.target.closest && e.target.closest('.outro, .peers, .act, .colophon');
     if (t && t.scrollHeight > t.clientHeight) {

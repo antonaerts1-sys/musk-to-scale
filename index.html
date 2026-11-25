@@ -11,6 +11,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wealth, to scale: Elon Musk">
 <meta name="twitter:description" content="One pixel is $1,000. Scroll through $816.9 billion and see what it could pay for.">
+<script>
+  // phones and touch screens get the vertical layout (scroll down); desktop scrolls sideways
+  window.LAYOUT_QUERY = '(max-width: 760px), (pointer: coarse)';
+  document.documentElement.className = window.matchMedia(window.LAYOUT_QUERY).matches ? 'v' : 'h';
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
