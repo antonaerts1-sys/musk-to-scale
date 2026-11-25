@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<title>Wealth, to scale: Elon Musk</title>
+<meta name="description" content="Elon Musk's fortune, drawn to scale. One pixel is $1,000. Scroll through $816.9 billion and see what it could pay for.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wealth, to scale: Elon Musk">
+<meta property="og:description" content="One pixel is $1,000. Scroll through $816.9 billion and see what it could pay for.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Wealth, to scale: Elon Musk">
+<meta name="twitter:description" content="One pixel is $1,000. Scroll through $816.9 billion and see what it could pay for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hud" aria-label="Progress">
+  <div class="hud-title">Wealth, to scale</div>
+  <div class="hud-progress" aria-hidden="true"><div class="hud-progress-fill"></div></div>
+  <div class="hud-counter">
+    <span class="hud-counter-label">1 px = $1,000</span>
+    <span class="hud-counter-value" aria-live="off"></span>
+  </div>
+</header>
+
+<main class="track" id="track">
+
+  <section class="intro" aria-labelledby="intro-title">
+    <h1 id="intro-title">Elon Musk is worth <span class="accent" data-fill="headline"></span></h1>
+    <p class="lede">That number means nothing to anyone. So we drew it. Every pixel on this page is $1,000. We start with amounts you know.</p>
+    <p class="scroll-hint">Scroll <span aria-hidden="true">&#8594;</span></p>
+  </section>
+
+  <section class="calibration" id="calibration" aria-label="Familiar amounts, to scale"></section>
+
+  <section class="bar-section" id="bar-section" aria-label="Elon Musk's fortune, to scale">
+    <div class="bar" id="bar">
+      <div class="bar-name">Elon Musk</div>
+    </div>
+    <div class="ruler" id="ruler" aria-hidden="true"></div>
+  </section>
+
+  <section class="outro" id="outro" aria-labelledby="outro-title">
+    <h2 id="outro-title">The end of the bar.</h2>
+    <div class="outro-body" id="outro-body"></div>
+  </section>
+
+  <section class="peers" id="peers" aria-labelledby="peers-title">
+    <h2 id="peers-title">And he is not alone.</h2>
+    <p class="peers-lede" id="peers-lede"></p>
+    <div class="peers-grid" id="peers-grid"></div>
+  </section>
+
+  <section class="act" id="act" aria-labelledby="act-title">
+    <h2 id="act-title">What can you do?</h2>
+    <div class="act-grid" id="act-grid"></div>
+  </section>
+
+  <section class="colophon" aria-label="Sources">
+    <div class="sources">
+      <h3>Sources and method</h3>
+      <p class="method" id="method"></p>
+      <ol id="sources"></ol>
+      <p class="credit">Inspired by <a href="https://mkorostoff.github.io/1-pixel-wealth/">Wealth, shown to scale</a> by Matt Korostoff (2020), which did this for Jeff Bezos and the 400 richest Americans.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
