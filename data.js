@@ -25,28 +25,49 @@ window.DATA = {
     perDay: 521.4e6       // Musk's average gain per day in 2025 [[bloomberg-2025]]
   },
 
+  // Income per person a year, 2025 (World Bank, GNI per capita, Atlas method) [[wb-gni]]
+  income: { lic: 811, bdi: 240, mwi: 600, ner: 750, moz: 570, sle: 830, ssf: 1610, ind: 2760 },
+  people: { lic: 767490169, poor: 816938142 },
+
+  // Progress lines fill long silences in the bar. Each line is used once, in
+  // order; "min" holds a line back until the bar has reached that amount.
+  // When the lines run out, the silence gets only a quiet counter.
   progress: {
     look: [
-      'That is {nWage} years of pay for a typical full-time worker in Belgium. [[statbel]]',
-      'Enough to give every person in Belgium {perPerson}. [[statbel-pop]]',
-      'That is {nLife} Belgian working lives, start to pension. [[eurostat]]',
-      "It would pay all of Belgium's development aid for {nOda} years. [[oda]]",
-      'Saving $1,000 a day, this stretch alone would take you {saveYears} years.',
-      'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]',
-      'That is {nHealth} years of Belgian public health insurance. [[riziv]]',
-      'It would close the malaria funding gap for {nMalaria} years. [[who-malaria]]'
+      { t: "That is a year of income for {nLic} people in the world's poorest countries, where income averages $811 per person. [[wb-gni]]" },
+      { race: { name: 'Burundi, a whole year', usd: 3.36e9 }, min: 3.4e9, t: 'More than the whole economy of Burundi produces in a year. 14.4 million people live there. [[wb-gdp]]' },
+            { min: 4e9, t: 'In Burundi, income is about $240 per person a year. This stretch is a year of income for {nBdi} people, many times the whole country. [[wb-gni]]' },
+      { t: 'Saving $1,000 a day, this stretch alone would take you {saveYears} years.' },
+      { race: { name: 'Sierra Leone, all income for a year', usd: 7.32e9 }, min: 7.4e9, t: 'More than all 8.8 million people in Sierra Leone earn in a year together, at about $830 each. [[wb-gni]]' },
+      { race: { name: 'Malawi, a whole year', usd: 14.92e9 }, min: 14.92e9, t: 'Past the whole yearly economy of Malawi: $14.9 billion, for 22 million people. [[wb-gdp]]' },
+      { t: 'Half of humanity lives on less than about <span class="nc">$9</span> a day, even after adjusting for local prices. [[wb-median]]' },
+      { t: 'A year of income in Niger is about $750. This stretch would pay that to {nNer} people. [[wb-gni]]' },
+      { race: { name: 'Haiti, a whole year', usd: 32.08e9 }, min: 32.1e9, t: 'More than Haiti produces in a year: $32 billion, for 11.9 million people. [[wb-gdp]]' },
+      { t: 'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]' },
+      { t: 'Across sub-Saharan Africa, income averages $1,610 per person a year. This is a year of income for {nSsf} people. [[wb-gni]]' },
+      { race: { name: 'Uganda, a whole year', usd: 61.99e9 }, min: 62e9, t: 'Past the whole yearly economy of Uganda: $62 billion, for 51 million people. [[wb-gdp]]' },
+      { t: 'It would close the malaria funding gap for {nMalaria} years. [[who-malaria]]' },
+      { t: 'At the average income in Mozambique, $570 a year, you would need {nMoz} years to earn this. [[wb-gni]]' },
+      { race: { name: 'DR Congo, a whole year', usd: 91.03e9 }, min: 91.1e9, t: 'You have now passed the entire yearly economy of the DR Congo: $91 billion, for 113 million people. [[wb-gdp]]' },
+      { t: 'Split over all 767 million people in the 25 low-income countries, this stretch is {perLic} each. [[wb-gdp]]' },
+      { race: { name: 'Ethiopia, a whole year', usd: 126.36e9 }, min: 126.4e9, t: 'More than Ethiopia produces in a year: $126 billion, for 135 million people. [[wb-gdp]]' },
+      { t: 'In India, income is about $2,760 per person a year. This is a year of income for {nInd} people. [[wb-gni]]' },
+      { race: { name: 'Kenya, a whole year', usd: 135.94e9 }, min: 136e9, t: 'Past the whole yearly economy of Kenya: $136 billion, for 58 million people. [[wb-gdp]]' }
     ],
     spend: [
-      '{blockTitle}. This block is drawn to scale too.',
-      'And he still has {leftHere}.',
-      'Every pixel you scroll through this dark block is {perPx} put to work.'
+      { t: 'Every pixel you scroll through this dark block is {perPx} put to work.' },
+      { t: 'Each dark block is drawn to scale, like everything else on this page.' },
+      { t: 'And he still has {leftHere}.' },
+      { min: 332e9, t: 'That is {pctSpent} of his fortune.' },
+      { t: 'Not one of these blocks would stop him being the richest person on Earth.' },
+      { race: { name: 'Nigeria, a whole year', usd: 290.79e9, basis: 'spent' }, min: 523e9, t: "That is more than Nigeria, Africa's most populous country, produces in a year: $291 billion, for 238 million people. [[wb-gdp]]" }
     ],
     tail: [
-      'Everything in this bar that is not dark red is still his.',
-      'That is still more than Jeff Bezos owns in total, $371.7 billion. [[forbes-rt]]',
-      'You have now scrolled past {soFar} of his fortune.',
-      'Saving $1,000 a day, the part you scrolled would take {saveYears} years.',
-      'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]'
+      { race: { name: 'Bangladesh, a whole year', usd: 456.32e9 }, t: 'You have now scrolled past more than Bangladesh produces in a year: $456 billion, for 176 million people. [[wb-gdp]]' },
+      { t: 'Saving $1,000 a day, the part you scrolled would take {saveYears} years.' },
+      { race: { name: 'All 25 low-income countries, a year', usd: 642.67e9 }, min: 700e9, t: 'More than all 25 low-income countries produce in a year, together: $643 billion, for 767 million people. [[wb-gdp]]' },
+      { t: 'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]' },
+      { t: 'Split over all 817 million people in extreme poverty, his whole fortune would be about $1,000 each. [[wb-poverty]]' }
     ]
   },
 
@@ -74,81 +95,103 @@ window.DATA = {
     { at: 0.6e9, type: 'note', title: 'Every 10 pixels you scroll is {perTen}.',
       html: 'That is {livesPerTen} Belgian working lives, gone in a flick of your thumb. [[eurostat]]' },
 
-    { at: 2.72e9, type: 'milestone', title: "Belgium's development aid", value: '$2.72 billion, all of 2025',
+    { at: 2.72e9, type: 'milestone', icon: 'heart', title: "Belgium's development aid", value: '$2.72 billion, all of 2025',
       html: 'Everything Belgium spent on aid to other countries in a year. [[oda]]' },
 
     { at: 4.2e9, type: 'square', usd: 2060000, label: 'Remember the working life? Here it is again, inside his fortune.' },
 
-    { at: 6.6e9, type: 'milestone', title: 'The famine plan he asked for', value: '$6.6 billion, 2021',
-      html: `<p>In late 2021 the UN World Food Programme asked billionaires for $6.6 billion to keep 42 million people from famine for a year. Musk tweeted that if WFP could explain how $6 billion would solve world hunger, he would sell Tesla stock and do it. [[fortune-2021]] WFP published the plan. [[wfp]]</p><p>A few weeks later he gave away about $5.7 billion in Tesla shares. In 2022 Bloomberg reported that the gift went to his own foundation. [[fortune-2022]]</p>` },
+    { at: 6.6e9, type: 'milestone', icon: 'utensils', title: 'The famine plan he asked for', value: '$6.6 billion, 2021',
+      html: '<p>In late 2021 the UN World Food Programme asked billionaires for $6.6 billion to keep 42 million people from famine for a year. Musk answered on Twitter. [[fortune-2021]]</p>' },
 
-    { at: 9.0e9, type: 'milestone', title: 'The richest person in Belgium', value: 'Eric Wittouck, $9.0 billion',
+    { at: 7.8e9, type: 'note', title: 'What happened next',
+      posts: [
+        { who: 'Elon Musk', meta: '@elonmusk · 31 October 2021', text: 'If WFP can describe on this Twitter thread exactly how $6B will solve world hunger, I will sell Tesla stock right now and do it.' },
+        { who: 'David Beasley, head of the WFP', meta: 'reply', text: '$6B will not solve world hunger, but it WILL prevent geopolitical instability, mass migration and save 42 million people on the brink of starvation.' }
+      ],
+      html: '<p>WFP published the plan. [[wfp]] A few weeks later Musk gave away about $5.7 billion in Tesla shares. In 2022 Bloomberg reported that the gift went to his own foundation. [[fortune-2022]] [[beasley]]</p>' },
+
+    { at: 9.0e9, type: 'milestone', icon: 'crown', title: 'The richest person in Belgium', value: 'Eric Wittouck, $9.0 billion',
       html: 'You just scrolled past his entire fortune. [[forbes-be]]' },
 
     { at: 12e9, type: 'note', title: "OK, we're almost at the end now." },
     { at: 13.6e9, type: 'note', title: 'Just kidding.', html: "You're {here} of the way. Keep scrolling." },
 
-    { at: 16.338e9, type: 'milestone', title: 'A 2% tax', value: '$16.3 billion a year',
+    { at: 16.338e9, type: 'milestone', icon: 'landmark', title: 'A 2% tax', value: '$16.3 billion a year',
       html: 'A yearly 2% tax on this one fortune would raise about this much. That is the rate economists proposed to the G20. [[zucman]]' },
 
-    { at: 35e9, type: 'milestone', title: "USAID's yearly budget", value: 'more than $35 billion, 2024 [[crs]]',
+    { at: 25e9, type: 'note', viz: 'people', title: '817 million people live on less than <span class="nc">$3</span> a day.',
+      html: 'Every dot is a million people. What you have scrolled so far would give each of them {perPoor}. [[wb-poverty]]' },
+
+    { at: 35e9, type: 'milestone', icon: 'globe', title: "USAID's yearly budget", value: 'more than $35 billion, 2024 [[crs]]',
       html: `<p>In February 2025, while leading DOGE, Musk wrote that "USAID is a criminal organization." [[hill]] By July 2025 the agency had effectively shut down. [[time]]</p><p>A study in The Lancet estimates the aid cuts could cause about 14 million extra deaths by 2030, 4.5 million of them children under five. [[lancet]]</p>` },
 
-    { at: 44e9, type: 'milestone', title: 'Twitter', value: '$44 billion, 2022',
+    { at: 44e9, type: 'milestone', icon: 'x', title: 'Twitter', value: '$44 billion, 2022',
       html: 'What he paid for the platform he later renamed X. [[twitter]]' },
 
-    { at: 51.3e9, type: 'milestone', title: 'Belgian health insurance, for a year', value: '$51.3 billion, 2026',
+    { at: 51.3e9, type: 'milestone', icon: 'pill', title: 'Belgian health insurance, for a year', value: '$51.3 billion, 2026',
       html: 'The entire 2026 budget for public health insurance in Belgium: every doctor visit, hospital stay and medicine it reimburses. [[riziv]]' },
 
-    { at: 55.1e9, type: 'milestone', title: 'All 18 Belgian billionaires, combined', value: '$55.1 billion',
+    { at: 55.1e9, type: 'milestone', icon: 'crown', title: 'All 18 Belgian billionaires, combined', value: '$55.1 billion',
       html: 'Every billionaire in Belgium, put together. [[forbes-be]]' },
 
     { at: 75e9, type: 'note', title: 'Half a billion dollars a day.',
-      html: 'In 2025 alone his fortune grew by $190 billion, about $521 million a day. [[bloomberg-2025]] That is around 250 Belgian working lives. Every single day.' },
+      html: 'In 2025 alone his fortune grew by $190 billion, about $521 million a day. [[bloomberg-2025]] That is a year of income for about 640,000 people in the world\'s poorest countries. Every single day. [[wb-gni]]' },
 
     { at: 110e9, type: 'note', title: 'Still him.', html: 'Nothing else is happening in this bar. It is just one person.' },
 
-    { at: 139e9, type: 'milestone', title: 'Jeff Bezos, 2020', value: '$139 billion',
+    { at: 139e9, type: 'milestone', icon: 'crown', title: 'Jeff Bezos, 2020', value: '$139 billion',
       html: 'The fortune the original version of this page drew in 2020. It took a long scroll then. [[original]]' },
 
     { at: 160e9, type: 'note', title: 'He was worth even more in June.',
       html: 'On 12 June 2026, the day SpaceX went public, he became the first person in history worth a trillion dollars. [[bloomberg-trillion]] He has slipped below that since. [[forbes-rt]]' },
 
-    { at: 202.9e9, type: 'milestone', title: 'Mark Zuckerberg', value: '$202.9 billion',
+    { at: 202.9e9, type: 'milestone', icon: 'crown', title: 'Mark Zuckerberg', value: '$202.9 billion',
       html: 'His entire fortune, on the same day. [[forbes-rt]]' },
 
     { at: 214e9, type: 'note', title: "Let's put it to use.",
       html: 'The next stretch of the bar is spent on things the world already knows how to fix and has priced. Each dark block is drawn to scale. Watch how much bar is left afterwards.' }
   ],
 
+  // Jump menu: where each part of the story starts (in dollars along the bar)
+  nav: [
+    { name: 'Amounts you know', at: 0 },
+    { name: 'Why so little tax?', at: 16.338e9 },
+    { name: 'Where does it come from?', at: 55.1e9 },
+    { name: 'How did we get here?', at: 139e9 },
+    { name: 'Spend it on the world', at: 214e9 },
+    { name: 'Still his', at: 645e9 },
+    { name: 'Public money, private fortune', at: 690e9 },
+    { name: 'What can you do?', section: 'act' }
+  ],
+
   spendStart: 232e9,
   spending: [
-    { kicker: 'Malaria · 5 years', title: "Close the malaria funding gap until 2030", usd: 27e9, cost: '$5.4 billion a year x 5 = $27 billion',
+    { icon: 'bug', kicker: 'Malaria · 5 years', title: "Close the malaria funding gap until 2030", usd: 27e9, cost: '$5.4 billion a year x 5 = $27 billion',
       html: '<p>Malaria killed 610,000 people in 2024. In Africa, about three in four were children under five. The WHO says funding falls about $5.4 billion a year short of what is needed. [[who-malaria]]</p>' },
 
-    { kicker: 'Vaccines · 2026-2030', title: "Pay Gavi's full vaccine budget", usd: 11.9e9, cost: '$11.9 billion',
+    { icon: 'syringe', kicker: 'Vaccines · 2026-2030', title: "Pay Gavi's full vaccine budget", usd: 11.9e9, cost: '$11.9 billion',
       html: '<p>Gavi asked for $11.9 billion to vaccinate 500 million children and save at least 8 million lives in 2026-2030. Donors came up short. [[gavi]]</p>' },
 
-    { kicker: 'AIDS, TB, malaria · 2027-2029', title: 'Fully fund the Global Fund', usd: 18e9, cost: '$18 billion',
+    { icon: 'pill', kicker: 'AIDS, TB, malaria · 2027-2029', title: 'Fully fund the Global Fund', usd: 18e9, cost: '$18 billion',
       html: '<p>The Global Fund asked for $18 billion, which it says would save 23 million lives. Donors pledged $12.64 billion. [[globalfund]]</p>' },
 
-    { kicker: 'Humanitarian aid · 2026', title: "Fund the UN's entire humanitarian appeal", usd: 33e9, cost: '$33 billion',
+    { icon: 'users', kicker: 'Humanitarian aid · 2026', title: "Fund the UN's entire humanitarian appeal", usd: 33e9, cost: '$33 billion',
       html: '<p>For 135 million people in 50 countries hit by war, disaster and hunger. In 2025, donors gave $12 billion, the lowest in a decade. [[un-gho]]</p>' },
 
-    { kicker: 'Foreign aid · 1 year', title: "Restore USAID's budget for a year", usd: 35e9, cost: '$35 billion',
+    { icon: 'globe', kicker: 'Foreign aid · 1 year', title: "Restore USAID's budget for a year", usd: 35e9, cost: '$35 billion',
       html: '<p>One year of what the agency managed before the 2025 cuts. [[crs]]</p>' },
 
-    { kicker: 'Hunger · 5 years', title: 'Invest in ending hunger', usd: 165e9, cost: '$33 billion a year x 5 = $165 billion',
+    { icon: 'utensils', kicker: 'Hunger · 5 years', title: 'Invest in ending hunger', usd: 165e9, cost: '$33 billion a year x 5 = $165 billion',
       html: '<p>About 673 million people went hungry in 2024. [[fao]] Researchers estimated it takes an extra $33 billion a year, mostly invested in small farms, to end hunger by 2030. [[ceres]] This pays for five of those years.</p>' },
 
-    { kicker: 'Water and toilets · 1 year', title: 'A year of building safe water and sanitation for everyone', usd: 114e9, cost: '$114 billion',
+    { icon: 'droplet', kicker: 'Water and toilets · 1 year', title: 'A year of building safe water and sanitation for everyone', usd: 114e9, cost: '$114 billion',
       html: '<p>2.1 billion people lack safely managed drinking water and 3.4 billion lack safe sanitation. [[jmp]] The World Bank estimated the building cost of reaching everyone at about $114 billion a year until 2030. [[worldbank-water]] This is one full year of it.</p>' }
   ],
 
   tail: [
     { at: 645e9, type: 'note', title: 'All of that: {spent}.',
       html: 'Malaria, vaccines, AIDS and TB, every UN humanitarian appeal, a year of USAID, five years against hunger, a year of water and toilets for the world.' },
-    { at: 690e9, type: 'note', title: 'And he would still have {remaining}.',
+    { at: 690e9, type: 'note', viz: 'drain', title: 'And he would still have {remaining}.',
       html: 'Everything in this bar that is not dark red. That is still more than Jeff Bezos ($371.7 billion). [[forbes-rt]] He would still be the richest person on Earth.' },
     { at: 770e9, type: 'note', title: 'Almost there. This time for real.' }
   ],
@@ -190,7 +233,7 @@ window.DATA = {
       share: true, linkText: 'Share the link' }
   ],
 
-  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
+  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] The euro switch converts every amount at that same rate, including older figures; amounts in international dollars (adjusted for local prices) and quotes stay in dollars. Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
 
   sources: [
     { id: 'forbes-rt', text: 'Forbes Real-Time Billionaires, snapshot 25 November 2026, 06:50 UTC.', url: 'https://www.forbes.com/real-time-billionaires/' },
@@ -201,6 +244,11 @@ window.DATA = {
     { id: 'fednot', text: 'Fednot, Property barometer Q3 2026: average house price EUR 360,613 (January to September 2026).', url: 'https://www.fednot.be/nl/nieuws/vastgoedbarometer-3de-trimester-2026-afkoelende-markt-prijzen-nog-lichtjes-in-de-lift/' },
     { id: 'eurostat', text: 'Eurostat, Duration of working life, Belgium, 2025: 35.7 years. Multiplied by the average full-time gross annual wage (EUR 52,662, Statbel 2022 incl. holiday pay).', url: 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_dwl_a?geo=BE&lang=en' },
     { id: 'statbel-pop', text: 'Statbel, Structure of the population: 11,867,634 inhabitants on 1 January 2026.', url: 'https://statbel.fgov.be/en/themes/population/structure-population' },
+    { id: 'wb-gni', text: 'World Bank, World Development Indicators: GNI per capita, Atlas method (current US$), 2025 (updated 11 November 2026). Burundi 240, Madagascar 560, Mozambique 570, Malawi 600, Niger 750, Sierra Leone 830, India 2,760, sub-Saharan Africa 1,610, low-income countries 811. This is national income divided by everyone, children included, not a wage.', url: 'https://data.worldbank.org/indicator/NY.GNP.PCAP.CD' },
+    { id: 'wb-gdp', text: 'World Bank, World Development Indicators: GDP (current US$) and population, 2025 (updated 11 November 2026). Burundi $3.36 bn, 14.4 m; Malawi $14.9 bn, 22.2 m; Haiti $32.1 bn, 11.9 m; Uganda $62.0 bn, 51.4 m; DR Congo $91.0 bn, 112.8 m; Ethiopia $126.4 bn, 135.5 m; Kenya $135.9 bn, 57.5 m; Nigeria $290.8 bn, 237.5 m; Bangladesh $456.3 bn, 175.7 m; the 25 low-income countries $642.7 bn, 767.5 m.', url: 'https://data.worldbank.org/indicator/NY.GDP.MKTP.CD' },
+    { id: 'wb-poverty', text: 'World Bank, Poverty and Inequality Platform (release September 2026): 816,938,142 people below the $3.00-a-day line (2021 PPP), 2025 nowcast.', url: 'https://pip.worldbank.org/' },
+    { id: 'wb-median', text: 'Our calculation on World Bank Poverty and Inequality Platform data: the line at which half the world falls below it is about $9.20 a day in 2024 (2021 PPP, income or consumption per person).', url: 'https://pip.worldbank.org/' },
+    { id: 'beasley', text: 'Reason, 6 November 2021: in a tweet responding to Musk, WFP chief David Beasley wrote "$6B will not solve world hunger, but it WILL prevent geopolitical instability, mass migration and save 42 million people on the brink of starvation."', url: 'https://reason.com/2021/11/06/united-nations-official-suggests-elon-musk-donation-could-solve-global-hunger-kinda/' },
     { id: 'wb-pip', text: 'World Bank, Poverty and Inequality Platform: world population 8,210,628,561 (2025 nowcast).', url: 'https://pip.worldbank.org/' },
     { id: 'ecb', text: 'European Central Bank, euro reference rate USD, 24 November 2026: 1.0963.', url: 'https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2026-11-01&endPeriod=2026-11-25' },
     { id: 'oda', text: 'OECD preliminary ODA data 2025 for Belgium, USD 2.72 billion (0.37% of GNI), as reported by VRT NWS / Belga, 9 April 2026.', url: 'https://www.vrt.be/vrtnws/nl/2026/04/09/ontwikkelingshulp-daalt-wereldwijd-met-bijna-een-kwart-zegt-oes/' },

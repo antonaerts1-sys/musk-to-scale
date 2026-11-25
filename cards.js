@@ -289,7 +289,7 @@
     { title: 'Where does it come from?', from: 56e9, to: 138e9, cards: [
   {
     "title": "Most of it is stock, not cash",
-    "html": "Musk's fortune is mostly stock. Forbes says most of it sits in SpaceX and, to a lesser extent, Tesla. That makes it hard to turn into cash. It is value on paper, not money in a bank account. [[forbes-profile-musk]]] [[yahoo-bloomberg-musk-stakes]]"
+    "html": "Musk's fortune is mostly stock. Forbes says most of it sits in SpaceX and, to a lesser extent, Tesla. That makes it hard to turn into cash. It is value on paper, not money in a bank account. [[forbes-profile-musk]] [[yahoo-bloomberg-musk-stakes]]"
   },
   {
     "title": "Net worth is shares times share price",
@@ -301,43 +301,43 @@
   },
   {
     "title": "From $2 billion to $185 billion",
-    "html": "Forbes first listed Musk as a billionaire in 2012, at $2 billion. CNBC put him near $27 billion at the start of 2020 and above $185 billion in January 2021. CNBC credits Tesla's stock and his pay package. [[wikipedia-wealth-musk]]] [[cnbc-musk-richest-2021]]"
+    "html": "Forbes first listed Musk as a billionaire in 2012, at $2 billion. CNBC put him near $27 billion at the start of 2020 and above $185 billion in January 2021. CNBC credits Tesla's stock and his pay package. [[wikipedia-wealth-musk]] [[cnbc-musk-richest-2021]]"
   },
   {
     "title": "End of 2024 and end of 2025",
-    "html": "A SpaceX share sale in December 2024 valued the company near $350 billion. Bloomberg put Musk at $439.2 billion, the first person past $400 billion. Forbes had him at $726 billion at the end of 2025. [[fortune-bloomberg-400b]]] [[forbes-end-2025]]"
+    "html": "A SpaceX share sale in December 2024 valued the company near $350 billion. Bloomberg put Musk at $439.2 billion, the first person past $400 billion. Forbes had him at $726 billion at the end of 2025. [[fortune-bloomberg-400b]] [[forbes-end-2025]]"
   },
   {
     "title": "A 2018 award is now 41% of his Tesla shares",
-    "html": "In 2018 Tesla granted Musk an award of options tied to targets. A court voided it, then Delaware's Supreme Court reinstated it on 19 December 2025. As of 30 September 2026, 286.4 million of his 699.6 million Tesla shares came from it. [[tesla-proxy-2026]]] [[gibsondunn-delaware-2018]]"
+    "html": "In 2018 Tesla granted Musk an award of options tied to targets. A court voided it, then Delaware's Supreme Court reinstated it on 19 December 2025. As of 30 September 2026, 286.4 million of his 699.6 million Tesla shares came from it. [[tesla-proxy-2026]] [[gibsondunn-delaware-2018]]"
   },
   {
     "title": "The 2025 award can pay out in 12 steps",
-    "html": "On 6 November 2025 Tesla shareholders approved a new award, with 75% support. Over 423 million shares arrive in 12 tranches, only if Tesla hits milestones. The first needs a $2 trillion market value. The last needs $8.5 trillion. [[cnbc-tesla-pay-2025]]] [[tesla-proxy-2026]]"
+    "html": "On 6 November 2025 Tesla shareholders approved a new award, with 75% support. Over 423 million shares arrive in 12 tranches, only if Tesla hits milestones. The first needs a $2 trillion market value. The last needs $8.5 trillion. [[cnbc-tesla-pay-2025]] [[tesla-proxy-2026]]"
   },
   {
     "title": "SpaceX goes public",
-    "html": "SpaceX listed on the Nasdaq on 12 June 2026. The IPO price was $135, valuing the company at $1.77 trillion. Before, its value came from private share sales. Now a market price sets it every trading day. [[cnbc-spacex-ipo]]] [[npr-spacex-ipo]]"
+    "html": "SpaceX listed on the Nasdaq on 12 June 2026. The IPO price was $135, valuing the company at $1.77 trillion. Before, its value came from private share sales. Now a market price sets it every trading day. [[cnbc-spacex-ipo]] [[npr-spacex-ipo]]"
   },
   {
     "title": "The listing made him a trillionaire",
-    "html": "On 12 June 2026, Bloomberg put Musk's fortune at $1.1 trillion. Forbes also called him the world's first trillionaire. No money moved. His SpaceX shares were now priced by a market. [[bloomberg-trillion]]] [[forbes-profile-musk]]"
+    "html": "On 12 June 2026, Bloomberg put Musk's fortune at $1.1 trillion. Forbes also called him the world's first trillionaire. No money moved. His SpaceX shares were now priced by a market. [[bloomberg-trillion]] [[forbes-profile-musk]]"
   },
   {
     "title": "Paper wealth can fall as fast as it rises",
-    "html": "Share prices drive the total. On 27 July 2026 Forbes reported his wealth below $700 billion as SpaceX stock fell. On 5 October, Bloomberg saw it jump about $65 billion in one day, back to $1.04 trillion. [[forbes-below-700b]]] [[jpost-bloomberg-trillionaire-again]]"
+    "html": "Share prices drive the total. On 27 July 2026 Forbes reported his wealth below $700 billion as SpaceX stock fell. On 5 October, Bloomberg saw it jump about $65 billion in one day, back to $1.04 trillion. [[forbes-below-700b]] [[jpost-bloomberg-trillionaire-again]]"
   },
   {
     "title": "Rankings count it differently",
-    "html": "Rankings do not agree. Bloomberg leaves out Musk's restricted stock in Tesla and SpaceX. Forbes lists unvested 2018 Tesla stock as a possible extra 8%. This page uses Forbes: $816.9 billion on 25 November 2026. [[yahoo-bloomberg-musk-stakes]]] [[forbes-profile-musk]]"
+    "html": "Rankings do not agree. Bloomberg leaves out Musk's restricted stock in Tesla and SpaceX. Forbes lists unvested 2018 Tesla stock as a possible extra 8%. This page uses Forbes: $816.9 billion on 25 November 2026. [[yahoo-bloomberg-musk-stakes]] [[forbes-profile-musk]]"
   },
   {
     "title": "Turning shares into cash means selling",
-    "html": "To get cash from shares, you have to sell them. In late 2021 Musk sold $14 billion of Tesla stock and said he would pay over $11 billion in tax. Over 98% of his wealth is still SpaceX and Tesla stock. [[cnbc-musk-11bn]]] [[jpost-bloomberg-trillionaire-again]]"
+    "html": "To get cash from shares, you have to sell them. In late 2021 Musk sold $14 billion of Tesla stock and said he would pay over $11 billion in tax. Over 98% of his wealth is still SpaceX and Tesla stock. [[cnbc-musk-11bn]] [[jpost-bloomberg-trillionaire-again]]"
   },
   {
     "title": "He can also borrow against shares",
-    "html": "Owners can borrow against shares instead of selling. Tesla's 2026 proxy says 207.5 million of Musk's Tesla shares are pledged as collateral for personal debt. Tesla's policy caps the loan at $3.5 billion or 25% of the pledged value, whichever is lower. [[tesla-proxy-2026]]] [[yahoo-bloomberg-musk-stakes]]"
+    "html": "Owners can borrow against shares instead of selling. Tesla's 2026 proxy says 207.5 million of Musk's Tesla shares are pledged as collateral for personal debt. Tesla's policy caps the loan at $3.5 billion or 25% of the pledged value, whichever is lower. [[tesla-proxy-2026]] [[yahoo-bloomberg-musk-stakes]]"
   }
 ] },
     { title: 'How did we get here?', from: 140e9, to: 213e9, cards: [
@@ -347,19 +347,19 @@
   },
   {
     "title": "Today Forbes tracks 3,316 billionaires",
-    "html": "On 25 November 2026, Forbes' real-time list counts 3,316 billionaires. Together they are worth about $19.6 trillion. That is 24 times as many people as in 1987 and about 66 times the money, before inflation. [[forbes-rt]]] [[forbes-1987]]"
+    "html": "On 25 November 2026, Forbes' real-time list counts 3,316 billionaires. Together they are worth about $19.6 trillion. That is 24 times as many people as in 1987 and about 66 times the money, before inflation. [[forbes-rt]] [[forbes-1987]]"
   },
   {
     "title": "One man now outweighs the whole 1987 club",
-    "html": "Elon Musk is worth $816.9 billion. That is almost three times the $295 billion of all 140 billionaires on Forbes' first list. These are plain dollars, not adjusted for inflation. [[forbes-rt]]] [[forbes-1987]]"
+    "html": "Elon Musk is worth $816.9 billion. That is almost three times the $295 billion of all 140 billionaires on Forbes' first list. These are plain dollars, not adjusted for inflation. [[forbes-rt]] [[forbes-1987]]"
   },
   {
     "title": "Forbes' March list: a record 3,428 billionaires",
-    "html": "In March 2026 Forbes counted a record 3,428 billionaires, worth $20.1 trillion together. A year earlier that total was $16.1 trillion. The group's wealth jumped by about $4 trillion in a year. [[forbes-pr-2026]]] [[ap-forbes-2026]]"
+    "html": "In March 2026 Forbes counted a record 3,428 billionaires, worth $20.1 trillion together. A year earlier that total was $16.1 trillion. The group's wealth jumped by about $4 trillion in a year. [[forbes-pr-2026]] [[ap-forbes-2026]]"
   },
   {
     "title": "The richest person keeps getting richer",
-    "html": "Bill Gates briefly passed $100 billion in 1999. In 2018, Bloomberg put Jeff Bezos above $150 billion. In March 2026, Forbes valued Elon Musk at $839 billion. Today, Forbes says $816.9 billion. [[bloomberg-2018]]] [[ap-forbes-2026]]] [[forbes-rt]]"
+    "html": "Bill Gates briefly passed $100 billion in 1999. In 2018, Bloomberg put Jeff Bezos above $150 billion. In March 2026, Forbes valued Elon Musk at $839 billion. Today, Forbes says $816.9 billion. [[bloomberg-2018]] [[ap-forbes-2026]] [[forbes-rt]]"
   },
   {
     "title": "In 2025, the richest 500 gained $2.2 trillion",
@@ -393,7 +393,7 @@
   },
   {
     "title": "NASA backed SpaceX before it reached orbit",
-    "html": "In 2006, NASA gave SpaceX $278 million in seed money to develop the Dragon capsule. No SpaceX rocket had reached orbit yet. In late 2008, NASA signed a $1.6 billion deal for 12 cargo flights. SpaceX's president later said NASA's support was vital. [[spacecom-cots-2006]]] [[spacecom-crs-2008]]] [[wapo-38bn]]"
+    "html": "In 2006, NASA gave SpaceX $278 million in seed money to develop the Dragon capsule. No SpaceX rocket had reached orbit yet. In late 2008, NASA signed a $1.6 billion deal for 12 cargo flights. SpaceX's president later said NASA's support was vital. [[spacecom-cots-2006]] [[spacecom-crs-2008]] [[wapo-38bn]]"
   },
   {
     "title": "NASA paid in steps, even when SpaceX ran late",
@@ -401,15 +401,15 @@
   },
   {
     "title": "Astronaut flights and the Moon lander",
-    "html": "In 2014, NASA picked SpaceX to fly astronauts to the space station, for $2.6 billion. Boeing got $4.2 billion for a rival capsule. In 2021, NASA awarded SpaceX $2.89 billion to build a Moon lander. That deal is firm fixed-price and pays per milestone. [[spaceflightnow-cctcap-2014]]] [[nasa-hls-2021]]"
+    "html": "In 2014, NASA picked SpaceX to fly astronauts to the space station, for $2.6 billion. Boeing got $4.2 billion for a rival capsule. In 2021, NASA awarded SpaceX $2.89 billion to build a Moon lander. That deal is firm fixed-price and pays per milestone. [[spaceflightnow-cctcap-2014]] [[nasa-hls-2021]]"
   },
   {
     "title": "The Pentagon is a big customer too",
-    "html": "The Post counted $7.6 billion from the Defense Department to SpaceX. In April 2025, the Space Force assigned SpaceX $5.9 billion to fly 28 national security missions. A classified spy-satellite deal, reported at $1.8 billion, is not public. These are payments for launches. [[wapo-38bn]]] [[defensenews-nssl-2025]]"
+    "html": "The Post counted $7.6 billion from the Defense Department to SpaceX. In April 2025, the Space Force assigned SpaceX $5.9 billion to fly 28 national security missions. A classified spy-satellite deal, reported at $1.8 billion, is not public. These are payments for launches. [[wapo-38bn]] [[defensenews-nssl-2025]]"
   },
   {
     "title": "Tesla's $465 million loan, paid back early",
-    "html": "In 2010, the US Energy Department lent Tesla $465 million. The money helped build the Model S and buy a factory in California. Tesla went public six months later. It repaid the loan in 2013, less than four years after borrowing. [[wapo-38bn]]] [[cnbc-tesla-repay-2013]]"
+    "html": "In 2010, the US Energy Department lent Tesla $465 million. The money helped build the Model S and buy a factory in California. Tesla went public six months later. It repaid the loan in 2013, less than four years after borrowing. [[wapo-38bn]] [[cnbc-tesla-repay-2013]]"
   },
   {
     "title": "Tesla also sells emissions credits to rivals",
@@ -417,15 +417,15 @@
   },
   {
     "title": "Credits decided Tesla's first profitable year",
-    "html": "Credits brought Tesla $1.6 billion in 2020. Without them, the Post found, Tesla would have lost over $700 million that year. It reported an $862 million profit instead. Credit income since: $1.8 billion in 2023, $2.8 billion in 2024, $2.0 billion in 2025. [[wapo-38bn]]] [[tesla-10k-2024]]] [[tesla-10k-2025]]"
+    "html": "Credits brought Tesla $1.6 billion in 2020. Without them, the Post found, Tesla would have lost over $700 million that year. It reported an $862 million profit instead. Credit income since: $1.8 billion in 2023, $2.8 billion in 2024, $2.0 billion in 2025. [[wapo-38bn]] [[tesla-10k-2024]] [[tesla-10k-2025]]"
   },
   {
     "title": "Buyers got a $7,500 tax credit",
-    "html": "Buyers of many electric cars, including Teslas, could claim a federal credit of up to $7,500. That money goes to the buyer, but experts say it helped Tesla's sales. Musk said Tesla did not need it. The credit ended for cars acquired after 30 September 2025. [[wapo-38bn]]] [[irs-clean-vehicle-credit]]"
+    "html": "Buyers of many electric cars, including Teslas, could claim a federal credit of up to $7,500. That money goes to the buyer, but experts say it helped Tesla's sales. Musk said Tesla did not need it. The credit ended for cars acquired after 30 September 2025. [[wapo-38bn]] [[irs-clean-vehicle-credit]]"
   },
   {
     "title": "States bid for the Tesla factory",
-    "html": "In 2014, Nevada offered Tesla about $1.25 billion in tax breaks over 20 years for a battery factory, more than double what Tesla asked. New York gave Musk's SolarCity $750 million, but hiring fell well short of what the state expected. [[sciam-nevada-2014]]] [[wapo-38bn]]"
+    "html": "In 2014, Nevada offered Tesla about $1.25 billion in tax breaks over 20 years for a battery factory, more than double what Tesla asked. New York gave Musk's SolarCity $750 million, but hiring fell well short of what the state expected. [[sciam-nevada-2014]] [[wapo-38bn]]"
   },
   {
     "title": "Paid for work, but with a head start",
