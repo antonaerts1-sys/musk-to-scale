@@ -333,6 +333,19 @@
       if (s.html) inner.appendChild(el('div', 'note-text', fill(s.html)));
       if (s.viz === 'drain') inner.appendChild(gauge(D.spending.length - 1, -1));
     }
+    if (s.photo) {
+      var body = el('div', 'zone-body');
+      while (inner.firstChild) body.appendChild(inner.firstChild);
+      var ph = el('div', 'zone-photo' + (s.photo.duo ? ' duo' : ''));
+      var img = el('img');
+      img.src = s.photo.src; img.alt = s.photo.alt; img.loading = 'lazy'; img.decoding = 'async';
+      ph.appendChild(img);
+      inner.classList.add('has-photo', 'photo-' + (s.photo.shape || 'portrait'));
+      inner.appendChild(ph);
+      inner.appendChild(body);
+      var oldIcon = body.querySelector('.zone-icon');
+      if (oldIcon) oldIcon.remove();
+    }
     zone.appendChild(inner);
     bar.appendChild(zone);
   });
@@ -375,32 +388,68 @@
   });
   if (D.peers.note) grid.appendChild(el('div', 'peers-note', fill(D.peers.note)));
 
-  var act = document.getElementById('act-grid');
-  D.actions.forEach(function (a, i) {
-    var c = el('article', 'act-card' + (a.primary ? ' primary' : ''));
-    c.appendChild(el('div', 'act-num', '0' + (i + 1)));
-    c.appendChild(el('h3', 'act-title', fill(a.title)));
-    c.appendChild(el('div', 'act-text', fill(a.html)));
-    if (a.link) {
-      var l = el('a', 'act-link', fill(a.linkText) + ' <span aria-hidden="true">&#8594;</span>');
-      l.href = a.link; l.target = '_blank'; l.rel = 'noopener';
-      c.appendChild(l);
-    } else if (a.share) {
-      var btn = el('button', 'act-link', fill(a.linkText));
+  // ---- what you can do ----
+  var A = D.act || {};
+  function linkEl(l, cls) {
+    var a = el('a', cls, fill(l.text) + ' <span aria-hidden="true">&#8594;</span>');
+    a.href = l.url;
+    if (l.url.charAt(0) !== '#') { a.target = '_blank'; a.rel = 'noopener'; }
+    return a;
+  }
+  var levers = document.getElementById('levers');
+  (A.levers || []).forEach(function (lv) {
+    var c = el('article', 'lever lever-' + lv.kind);
+    c.appendChild(el('div', 'lever-label', fill(lv.label)));
+    var head = el('div', 'lever-head');
+    head.appendChild(el('div', 'lever-big', lv.big));
+    head.appendChild(el('div', 'lever-sub', fill(lv.sub)));
+    c.appendChild(head);
+    var rows = el('div', 'lever-rows');
+    lv.rows.forEach(function (r) { rows.appendChild(el('div', 'lever-row', fill(r))); });
+    c.appendChild(rows);
+    var links = el('div', 'lever-links');
+    links.appendChild(linkEl(lv.link, 'lever-btn'));
+    if (lv.link2) links.appendChild(linkEl(lv.link2, 'lever-link'));
+    c.appendChild(links);
+    levers.appendChild(c);
+  });
+
+  var whereRows = document.getElementById('where-rows');
+  (A.where || []).forEach(function (w) {
+    var r = el('div', 'where-row');
+    r.appendChild(el('div', 'where-place', '<strong>' + w.place + '</strong><span>' + w.when + '</span>'));
+    r.appendChild(el('div', 'where-what', fill(w.what)));
+    r.appendChild(el('div', 'where-status ' + w.kind, w.status));
+    whereRows.appendChild(r);
+  });
+  var side = document.getElementById('where-side');
+  if (A.poll) { var pc = el('div', 'where-stat poll'); pc.appendChild(el('div', 'where-stat-label', 'Public opinion')); pc.appendChild(el('div', 'where-stat-big', A.poll.big)); pc.appendChild(el('div', 'where-stat-text', fill(A.poll.text))); side.appendChild(pc); }
+  if (A.growth) { var gc = el('div', 'where-stat growth'); gc.appendChild(el('div', 'where-stat-label', 'Meanwhile, in 2025')); gc.appendChild(el('div', 'where-stat-big', A.growth.big)); gc.appendChild(el('div', 'where-stat-text', fill(A.growth.text))); side.appendChild(gc); }
+  side.appendChild(el('p', 'where-note', 'It keeps coming close, and keeps being voted down. It only happens when voters keep asking.'));
+
+  var ladder = document.getElementById('ladder');
+  (A.steps || []).forEach(function (st, k) {
+    var c = el('article', 'step' + (st.primary ? ' primary' : ''));
+    c.style.setProperty('--h', (52 + k * 12) + '%');
+    c.appendChild(el('div', 'step-time', st.time));
+    c.appendChild(el('h3', 'step-title', fill(st.title)));
+    c.appendChild(el('div', 'step-text', fill(st.html)));
+    var links = el('div', 'step-links');
+    links.appendChild(linkEl(st.link, 'step-link'));
+    if (st.link2) links.appendChild(linkEl(st.link2, 'step-link'));
+    if (st.share) {
+      var btn = el('button', 'step-link', 'Share this page <span aria-hidden="true">&#8594;</span>');
       btn.type = 'button';
       btn.addEventListener('click', function () {
-        var url = location.href.split('#')[0];
-        if (navigator.share) {
-          navigator.share({ title: document.title, url: url }).catch(function () {});
-        } else if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).then(function () { btn.textContent = 'Link copied'; });
-        } else {
-          window.prompt('Copy this link:', url);
-        }
+        var url = location.href.split('#')[0].split('?')[0];
+        if (navigator.share) navigator.share({ title: document.title, url: url }).catch(function () {});
+        else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { btn.textContent = 'Link copied'; });
+        else window.prompt('Copy this link:', url);
       });
-      c.appendChild(btn);
+      links.appendChild(btn);
     }
-    act.appendChild(c);
+    c.appendChild(links);
+    ladder.appendChild(c);
   });
 
   document.getElementById('method').innerHTML = fill(D.method);
@@ -425,7 +474,7 @@
     var dec = (num.split('.')[1] || '').length;
     if (suf) return v.toFixed(dec >= 2 ? 2 : 1).replace(/\.0+$/, '');
     if (dec) return v.toFixed(dec);
-    if (v >= 10000) { var p = Math.pow(10, Math.floor(Math.log10(v)) - 2); v = Math.round(v / p) * p; }
+    if (v >= 1000) { var p = Math.pow(10, Math.floor(Math.log10(v)) - (v >= 10000 ? 2 : 1)); v = Math.round(v / p) * p; }
     return Math.round(v).toLocaleString('en-US');
   }
   function toEur(t) { return t.replace(moneyRe, function (m, num, suf) { return '€' + eurNum(num, suf) + (suf || ''); }); }
@@ -449,9 +498,47 @@
     curButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.cur === c)); });
     hudScale.textContent = c === 'eur' ? '1 px = €912' : '1 px = $1,000';
     try { localStorage.setItem('cur', c); } catch (e) {}
+    if (mineIn) mine();
     update();
   }
   curButtons.forEach(function (b) { b.addEventListener('click', function () { setCurrency(b.dataset.cur); }); });
+
+  // ---- your own bar: what giving part of your income looks like at this scale ----
+  var mineIn = document.getElementById('mine-income');
+  var minePct = 10;
+  var WORK_YEARS = 35.7;   // a working life in Belgium (Eurostat)
+  var HIS_TAX = 0.02 * D.netWorth;
+  function fmtCur(usd) {
+    var v = cur === 'eur' ? usd / RATE : usd;
+    return (cur === 'eur' ? '€' : '$') + Math.round(v).toLocaleString('en-US');
+  }
+  function mine() {
+    var incomeLocal = Math.max(0, Number(mineIn.value) || 0);
+    var incomeUsd = cur === 'eur' ? incomeLocal * RATE : incomeLocal;
+    var yearUsd = incomeUsd * minePct / 100;
+    var lifeUsd = yearUsd * WORK_YEARS;
+    var yearPx = yearUsd / PX_USD, lifePx = lifeUsd / PX_USD;
+    document.querySelector('.mine-sym').textContent = cur === 'eur' ? '€' : '$';
+    document.querySelector('.mine-px').textContent = cur === 'eur' ? '€912' : '$1,000';
+    document.getElementById('mine-year').innerHTML = '<strong>' + fmtCur(yearUsd) + '</strong> · ' + (yearPx < 10 ? yearPx.toFixed(1) : Math.round(yearPx).toLocaleString('en-US')) + ' pixels';
+    document.getElementById('mine-life').innerHTML = '<strong>' + fmtCur(lifeUsd) + '</strong> over ' + WORK_YEARS + ' years';
+    var lo = Math.floor(lifeUsd / 5500), hi = Math.floor(lifeUsd / 3000);
+    document.getElementById('mine-lives').innerHTML = 'Roughly <strong>' + (lo === hi ? lo : lo + ' to ' + hi) + ' lives</strong> saved, by GiveWell\'s estimate';
+    function sq(id, px) { var n = document.getElementById(id), d = Math.max(1, Math.round(Math.sqrt(px))); n.style.width = d + 'px'; n.style.height = d + 'px'; }
+    sq('mine-sq-year', yearPx); sq('mine-sq-life', lifePx);
+    var screens = HIS_TAX / PX_USD / (window.innerWidth * window.innerHeight);
+    document.getElementById('mine-his').innerHTML = 'His 2% tax, for one year, is <strong>' + (cur === 'eur' ? '€' + (HIS_TAX / RATE / 1e9).toFixed(1) : '$' + (HIS_TAX / 1e9).toFixed(1)) + ' billion</strong>. At the same scale it would fill about <strong>' + Math.round(screens).toLocaleString('en-US') + ' screens like yours</strong>, edge to edge.';
+    document.getElementById('mine-note').innerHTML = 'A working life of ' + WORK_YEARS + ' years is the Belgian average. Lives saved use GiveWell\'s range of about $3,000 to $5,500 per life.';
+  }
+  mineIn.addEventListener('input', mine);
+  document.querySelectorAll('.mine-pct button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      minePct = Number(b.dataset.pct);
+      document.querySelectorAll('.mine-pct button').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+      mine();
+    });
+  });
+  mine();
   function full(usd) {
     var v = cur === 'eur' ? usd / RATE : usd;
     return (cur === 'eur' ? '€' : '$') + (Math.round(v / 1e6) * 1e6).toLocaleString('en-US');
@@ -521,7 +608,7 @@
     var pos = scrollPos() + screenLen() * 0.5 - bl;
     var usd = Math.max(0, Math.min(D.netWorth, pos * USD_PER_X));
     var inBar = pos > 0 && pos * USD_PER_X < D.netWorth;
-    bigBox.classList.toggle('on', inBar || V);
+    bigBox.classList.toggle('on', inBar || (V && pos * USD_PER_X < D.netWorth));
     bigValue.textContent = full(usd);
     bigOf.textContent = 'of ' + full(D.netWorth) + ' · ' + (usd / D.netWorth * 100).toFixed(1) + '%';
     prog.classList.toggle('on', pos > 0);
@@ -599,7 +686,7 @@
   // a vertical mouse wheel moves the page sideways, unless a section scrolls itself
   if (!V) window.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-    var t = e.target.closest && e.target.closest('.outro, .peers, .act, .colophon, .sheet');
+    var t = e.target.closest && e.target.closest('.outro, .peers, .act, .mine, .where, .steps, .colophon, .sheet');
     if (t && t.scrollHeight > t.clientHeight) {
       var atTop = t.scrollTop <= 0, atBottom = t.scrollTop + t.clientHeight >= t.scrollHeight - 1;
       if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) return;

@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -85,7 +85,47 @@
 
   <section class="act" id="act" aria-labelledby="act-title">
     <h2 id="act-title">What can you do?</h2>
-    <div class="act-grid" id="act-grid"></div>
+    <p class="act-sub">One thing with your money. One with your vote.</p>
+    <div class="levers" id="levers"></div>
+  </section>
+
+  <section class="mine nc" id="mine" aria-labelledby="mine-title">
+    <h2 id="mine-title">Now look at your own bar.</h2>
+    <p class="mine-lede">What do you earn in a year, after tax? We draw what giving part of it looks like, on the same scale as his fortune: one pixel is <span class="mine-px">$1,000</span>.</p>
+    <div class="mine-form">
+      <label class="mine-income"><span class="mine-sym">$</span><input id="mine-income" type="number" inputmode="numeric" min="0" step="1000" value="40000" aria-label="Your yearly income after tax"><span class="mine-unit">a year, after tax</span></label>
+      <div class="mine-pct" role="group" aria-label="Share to give">
+        <span>I would give</span>
+        <button type="button" data-pct="1" aria-pressed="false">1%</button><button type="button" data-pct="5" aria-pressed="false">5%</button><button type="button" data-pct="10" aria-pressed="true">10%</button>
+      </div>
+    </div>
+    <div class="mine-grid">
+      <dl class="mine-out">
+        <div><dt>Every year</dt><dd id="mine-year"></dd></div>
+        <div><dt>A working life</dt><dd id="mine-life"></dd></div>
+        <div><dt>What it can do</dt><dd id="mine-lives"></dd></div>
+      </dl>
+      <div class="mine-draw" aria-hidden="true">
+        <figure><div class="mine-sq" id="mine-sq-year"></div><figcaption>One year of your giving, to scale</figcaption></figure>
+        <figure><div class="mine-sq" id="mine-sq-life"></div><figcaption>A whole working life of it, to scale</figcaption></figure>
+      </div>
+    </div>
+    <p class="mine-his" id="mine-his"></p>
+    <p class="mine-note" id="mine-note"></p>
+  </section>
+
+  <section class="where" id="where" aria-labelledby="where-title">
+    <h2 id="where-title">Where the billionaire tax stands</h2>
+    <div class="where-grid">
+      <div class="where-rows" id="where-rows"></div>
+      <aside class="where-side" id="where-side"></aside>
+    </div>
+  </section>
+
+  <section class="steps" id="steps" aria-labelledby="steps-title">
+    <h2 id="steps-title">Pick your step.</h2>
+    <p class="act-sub">From one minute to a lifetime. Each step is a little bigger than the last.</p>
+    <div class="ladder" id="ladder"></div>
   </section>
 
   <section class="colophon" aria-label="Sources">
@@ -93,14 +133,15 @@
       <h3>Sources and method</h3>
       <p class="method" id="method"></p>
       <ol id="sources"></ol>
+      <p class="credit">Photos via Wikimedia Commons, resized: Elon Musk by <a href="https://commons.wikimedia.org/wiki/File:Elon_Musk_2015.jpg">Steve Jurvetson</a> (CC BY 2.0); Jeff Bezos by <a href="https://commons.wikimedia.org/wiki/File:Jeff_Bezos%27_iconic_laugh_crop.jpg">Steve Jurvetson, crop by King of Hearts</a> (CC BY 2.0); Mark Zuckerberg by <a href="https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_F8_2018_Keynote_(cropped).jpg">Anthony Quintano</a> (CC BY 2.0); children under a mosquito net in Mwanza, Tanzania, by the <a href="https://commons.wikimedia.org/wiki/File:Net_Distribution_In_Mwanza,_Tanzania_2016_(31827023401).jpg">President's Malaria Initiative</a> (public domain); a village water pump in Rwanda by <a href="https://commons.wikimedia.org/wiki/File:Water_pump_in_Village_from_Rwanda.jpg">Rwejo</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>). Icons: Lucide (ISC) and Simple Icons (CC0).</p>
       <p class="credit">Inspired by <a href="https://mkorostoff.github.io/1-pixel-wealth/">Wealth, shown to scale</a> by Matt Korostoff (2020), which did this for Jeff Bezos and the 400 richest Americans.</p>
     </div>
   </section>
 
 </main>
 
-<script src="data.js?v=7"></script>
-<script src="cards.js?v=7"></script>
-<script src="main.js?v=7"></script>
+<script src="data.js?v=10"></script>
+<script src="cards.js?v=10"></script>
+<script src="main.js?v=10"></script>
 </body>
 </html>
