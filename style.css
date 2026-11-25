@@ -122,8 +122,19 @@ a:hover { color: var(--accent); }
 .sheet-item i { width: 6px; height: 22px; background: var(--line); flex: 0 0 auto; }
 .sheet-item.on i { background: var(--accent); }
 
-.skip-link { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
-.skip-link:hover { text-decoration: underline; }
+/* skip ahead: only offered once you have scrolled a while */
+.skip-chip {
+  position: fixed; z-index: 10;
+  right: 40px; bottom: calc(var(--dock-h) + 16px);
+  padding: 10px 14px;
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--ink);
+  font-family: var(--mono); font-size: 13px; font-weight: 600; text-decoration: none;
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.skip-chip.on { opacity: 1; transform: none; pointer-events: auto; }
+.skip-chip:hover { background: var(--ink); color: var(--paper); }
 
 /* ---------- Track ---------- */
 .track {
@@ -447,6 +458,7 @@ html.v { overflow-x: hidden; }
 }
 .v .big-value { font-size: clamp(24px, 8.6vw, 34px); }
 .v .big-of { font-size: 11px; margin-top: 4px; }
+.v .skip-chip { right: 16px; left: 16px; text-align: center; bottom: calc(var(--dock-h) + var(--counter-h) + 12px); }
 .v .trip-toast { bottom: calc(var(--dock-h) + var(--counter-h) + 12px); font-size: 14px; }
 .v .dock { padding: 0 12px; gap: 0; border-top: 1px solid var(--line); }
 .v .dock-buttons { width: 100%; }

@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="style.css?v=14">
 </head>
 <body>
 
@@ -29,8 +29,8 @@
   <div class="hud-right">
     <span class="hud-scale">1 px = $1,000</span>
     <div class="cur" role="group" aria-label="Show amounts in">
-      <button type="button" data-cur="usd" aria-pressed="true">$</button>
-      <button type="button" data-cur="eur" aria-pressed="false">&euro;</button>
+      <button type="button" data-cur="usd" aria-pressed="false">$</button>
+      <button type="button" data-cur="eur" aria-pressed="true">&euro;</button>
     </div>
   </div>
 </header>
@@ -41,6 +41,7 @@
   <div class="big-of"></div>
 </div>
 <div class="trip-toast" role="status" aria-live="polite"></div>
+<a class="skip-chip" href="#" data-jump="214e9">Seen enough? Skip to what it could pay for <span aria-hidden="true">&#8594;</span></a>
 
 <nav class="dock" aria-label="Move through the page">
   <div class="dock-buttons">
@@ -61,7 +62,6 @@
     <h1 id="intro-title">Elon Musk is worth <span class="accent" data-fill="headline"></span></h1>
     <p class="lede">That number means nothing to anyone. So we drew it. Every pixel on this page is $1,000. We start with amounts you know.</p>
     <p class="scroll-hint">Scroll <span aria-hidden="true">&#8594;</span></p>
-    <a class="skip-link" href="#" data-jump="214e9">No time? Skip to what it could pay for <span aria-hidden="true">&#8594;</span></a>
   </section>
 
   <section class="calibration" id="calibration" aria-label="Familiar amounts, to scale"></section>
@@ -141,8 +141,8 @@
 
 </main>
 
-<script src="data.js?v=13"></script>
-<script src="cards.js?v=13"></script>
-<script src="main.js?v=13"></script>
+<script src="data.js?v=14"></script>
+<script src="cards.js?v=14"></script>
+<script src="main.js?v=14"></script>
 </body>
 </html>

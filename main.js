@@ -499,11 +499,13 @@
     moneyNodes.forEach(function (m) { m.n.nodeValue = c === 'eur' ? toEur(m.usd) : m.usd; });
     curButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.cur === c)); });
     hudScale.textContent = c === 'eur' ? '1 px = €912' : '1 px = $1,000';
-    try { localStorage.setItem('cur', c); } catch (e) {}
     if (mineIn) mine();
     update();
   }
-  curButtons.forEach(function (b) { b.addEventListener('click', function () { setCurrency(b.dataset.cur); }); });
+  curButtons.forEach(function (b) { b.addEventListener('click', function () {
+    try { localStorage.setItem('currency', b.dataset.cur); } catch (e) {}
+    setCurrency(b.dataset.cur);
+  }); });
 
   // ---- your own bar: what giving part of your income looks like at this scale ----
   var mineIn = document.getElementById('mine-income');
@@ -567,6 +569,7 @@
   var prog = document.querySelector('.hud-progress');
   var progFill = document.querySelector('.hud-progress-fill');
   var ticking = false;
+  var skipChip = document.querySelector('.skip-chip'), SKIP_FROM = 12e9, SKIP_TO = Number(skipChip && skipChip.dataset.jump);
 
   function barStart() {
     var r = bar.getBoundingClientRect();
@@ -637,6 +640,7 @@
       bigBox.classList.remove('fast');
     }
     prog.classList.toggle('on', pos > 0);
+    if (skipChip) skipChip.classList.toggle('on', usd >= SKIP_FROM && usd < SKIP_TO - 15e9);
     progFill.style.width = (usd / D.netWorth * 100).toFixed(3) + '%';
     // people grid fills as you scroll through its stretch
     vizList.forEach(function (v) {
@@ -746,12 +750,9 @@
     window.scrollTo(window.scrollX + dy, 0);
   }, { passive: false });
 
-  // start in euro for readers in the euro area, unless they chose before
+  // start in euro, unless the reader chose dollars before
   var saved = null;
-  try { saved = localStorage.getItem('cur'); } catch (e) {}
-  var euroLang = (navigator.languages || [navigator.language || '']).some(function (l) {
-    return /-(BE|NL|DE|FR|LU|AT|IE|ES|PT|IT|FI|GR|SK|SI|EE|LV|LT|MT|CY|HR)$/i.test(l);
-  });
-  if (saved === 'eur' || (!saved && euroLang)) setCurrency('eur');
+  try { saved = localStorage.getItem('currency'); } catch (e) {}
+  if (saved !== 'usd') setCurrency('eur');
   update();
 })();
