@@ -77,8 +77,6 @@
   tokens.netWorthFull = money.format(D.netWorth);
   tokens.barPx = Math.round(x(D.netWorth)).toLocaleString('en-US');
   tokens.barMetres = Math.round(x(D.netWorth) * 0.0254 / 96).toLocaleString('en-US');
-  var barMin = Math.round(x(D.netWorth) / 220 / 60); // at the 1x pace of "Scroll for me"
-  tokens.barTime = (barMin >= 60 ? Math.floor(barMin / 60) + ' hours' + (barMin % 60 ? ' and ' + barMin % 60 + ' minutes' : '') : barMin + ' minutes').replace(/^1 hours/, '1 hour');
   tokens.spent = short(spent);
   tokens.remaining = short(remaining);
   tokens.spentPct = (spent / D.netWorth * 100).toFixed(0) + '%';
@@ -548,19 +546,16 @@
     return (cur === 'eur' ? '€' : '$') + (Math.round(v / 1e6) * 1e6).toLocaleString('en-US');
   }
   // distance and time, so fast scrolling keeps its sense of scale
-  var M_PER_PX = 0.0254 / 96, PACE = 220; // a standard screen; px per second at 1x
+  var M_PER_PX = 0.0254 / 96; // a standard screen, 96 pixels per inch
   function metres(px) {
     var m = px * M_PER_PX;
     return m < 1 ? Math.round(m * 100) + ' cm' : Math.round(m).toLocaleString('en-US') + ' m';
   }
-  function duration(px) {
-    var s = Math.round(px / PACE);
-    if (s < 60) return s + ' seconds';
-    var min = Math.round(s / 60);
-    if (min < 60) return min + (min === 1 ? ' minute' : ' minutes');
-    var h = Math.floor(min / 60), rest = min % 60;
-    return h + ' h' + (rest ? ' ' + rest + ' min' : '');
+  function pixels(px) {
+    var p = Math.round(px);
+    return (p >= 1e6 ? (p / 1e6).toFixed(1) + ' million' : (Math.round(p / 1000) * 1000).toLocaleString('en-US')) + ' pixels';
   }
+
 
   // ---- scroll: counter, progress, chapters ----
   var bigBox = document.querySelector('.big-counter');
@@ -633,7 +628,7 @@
     bigValue.textContent = full(usd);
     var gone = Math.max(0, Math.min(barPx, pos));
     if (fastUntil > performance.now()) {
-      bigOf.textContent = metres(gone) + ' of ' + metres(barPx) + ' · ' + duration(gone) + ' of scrolling';
+      bigOf.textContent = metres(gone) + ' of ' + metres(barPx) + ' scrolled · ' + pixels(gone);
       bigBox.classList.add('fast');
     } else {
       bigOf.textContent = 'of ' + full(D.netWorth) + ' · ' + (usd / D.netWorth * 100).toFixed(1) + '%';
@@ -673,18 +668,43 @@
   }, { passive: true });
   setInterval(function () { if (bigBox.classList.contains('fast') && fastUntil <= performance.now()) update(); }, 500);
 
-  // after a jump: how much bar you just skipped
-  var toast = document.querySelector('.trip-toast'), toastT = 0;
+  // jumping ahead: a short animation of the distance you skip, then the page
+  var flow = document.querySelector('.skip-flow'), flowRaf = 0, flowT = 0;
+  var sfM = flow.querySelector('.sf-m'), sfDone = flow.querySelector('.sf-done'), sfRun = flow.querySelector('.sf-run');
+  var sfPos = flow.querySelector('.sf-pos'), sfText = flow.querySelector('.sf-text');
+  flow.querySelector('.sf-total').textContent = metres(barPx);
+  function closeFlow() {
+    cancelAnimationFrame(flowRaf); clearTimeout(flowT);
+    flow.classList.remove('on');
+    flowT = setTimeout(function () { flow.hidden = true; }, 350);
+  }
+  flow.addEventListener('click', closeFlow);
+  window.addEventListener('keydown', function () { if (!flow.hidden) closeFlow(); });
   function tripSkip(a, b) {
     var pa = Math.max(0, Math.min(barPx, a + screenLen() * 0.5 - bl));
     var pb = Math.max(0, Math.min(barPx, b + screenLen() * 0.5 - bl));
-    var d = Math.abs(pb - pa);
+    var d = pb - pa;
     if (d < screenLen() * 2) return;
-    toast.innerHTML = '<strong>You ' + (pb > pa ? 'skipped' : 'went back') + ' ' + metres(d) + ' of bar.</strong> ' +
-      (pb > pa ? 'Scrolling it would have taken ' : 'That is ') + duration(d) + (pb > pa ? '.' : ' of scrolling.');
-    toast.classList.add('on');
-    clearTimeout(toastT);
-    toastT = setTimeout(function () { toast.classList.remove('on'); }, 5000);
+    clearTimeout(flowT); cancelAnimationFrame(flowRaf);
+    sfDone.style.width = (pa / barPx * 100) + '%';
+    sfRun.style.left = (pa / barPx * 100) + '%';
+    sfText.innerHTML = '';
+    flow.hidden = false;
+    requestAnimationFrame(function () { flow.classList.add('on'); });
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DUR = still ? 0 : 2600, t0 = performance.now();
+    function frame(t) {
+      var f = DUR ? Math.min(1, (t - t0) / DUR) : 1;
+      var e = 1 - Math.pow(1 - f, 3);
+      sfM.textContent = metres(d * e);
+      sfRun.style.width = (d * e / barPx * 100) + '%';
+      sfPos.textContent = pixels(d * e);
+      if (f < 1) { flowRaf = requestAnimationFrame(frame); return; }
+      sfText.innerHTML = 'That is how far you would have scrolled to get here. ' +
+        (barPx - pb > screenLen() ? '<strong>' + metres(barPx - pb) + '</strong> of his fortune is still ahead.' : 'You are at the end of the bar.');
+      flowT = setTimeout(closeFlow, 2800);
+    }
+    flowRaf = requestAnimationFrame(frame);
   }
 
   // ---- autoscroll: let the page scroll for you, faster if you like ----
@@ -750,9 +770,9 @@
     window.scrollTo(window.scrollX + dy, 0);
   }, { passive: false });
 
-  // start in euro, unless the reader chose dollars before
+  // start in dollars, unless the reader chose euro before
   var saved = null;
   try { saved = localStorage.getItem('currency'); } catch (e) {}
-  if (saved !== 'usd') setCurrency('eur');
+  if (saved === 'eur') setCurrency('eur');
   update();
 })();

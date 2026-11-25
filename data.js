@@ -18,7 +18,7 @@ window.DATA = {
   base: {
     wage: 52800,          // typical full-time gross pay, Belgium [[statbel]]
     lifetime: 2060000,    // Belgian working life [[eurostat]]
-    population: 11867634, // Belgium, 1 Jan 2026 [[statbel-pop]]
+    population: 11867634, // Belgium, 1 Jan 2026 (Statbel)
     oda: 2.72e9,          // Belgian development aid 2025 [[oda]]
     health: 51.3e9,       // RIZIV budget 2026 [[riziv]]
     malariaGap: 5.4e9,    // WHO malaria funding gap per year [[who-malaria]]
@@ -36,9 +36,9 @@ window.DATA = {
     look: [
       { t: "That is a year of income for {nLic} people in the world's poorest countries, where income averages $811 per person. [[wb-gni]]" },
       { race: { name: 'Burundi, a whole year', usd: 3.36e9 }, min: 3.4e9, t: 'More than the whole economy of Burundi produces in a year. 14.4 million people live there. [[wb-gdp]]' },
-            { min: 4e9, t: 'In Burundi, income is about $240 per person a year. This stretch is a year of income for {nBdi} people, many times the whole country. [[wb-gni]]' },
+            { min: 4e9, t: 'In Burundi, income is about $240 per person a year. This stretch is a year of income for {nBdi} people, more than live in the whole country. [[wb-gni]]' },
       { t: 'Saving $1,000 a day, this stretch alone would take you {saveYears} years.' },
-      { race: { name: 'Sierra Leone, all income for a year', usd: 7.32e9 }, min: 7.4e9, t: 'More than all 8.8 million people in Sierra Leone earn in a year together, at about $830 each. [[wb-gni]]' },
+      { race: { name: 'Sierra Leone, all income for a year', usd: 7.32e9 }, min: 7.4e9, t: 'More than all 8.8 million people in Sierra Leone earn in a year together, at about $830 each. [[wb-gni]] [[wb-gdp]]' },
       { race: { name: 'Malawi, a whole year', usd: 14.92e9 }, min: 14.92e9, t: 'Past the whole yearly economy of Malawi: $14.9 billion, for 22 million people. [[wb-gdp]]' },
       { t: 'Half of humanity lives on less than about <span class="nc">$9</span> a day, even after adjusting for local prices. [[wb-median]]' },
       { t: 'A year of income in Niger is about $750. This stretch would pay that to {nNer} people. [[wb-gni]]' },
@@ -87,7 +87,7 @@ window.DATA = {
     { usd: 28800, label: "A year on Belgium's minimum wage, before tax [[cnt]]", value: '~$28,800' },
     { usd: 52800, label: 'A year of pay for a typical full-time worker in Belgium, before tax [[statbel]]', value: '~$52,800' },
     { usd: 395000, label: 'An average house in Belgium [[fednot]]', value: '~$395,000' },
-    { usd: 2060000, label: 'A whole working life in Belgium: 35.7 years of typical pay [[eurostat]]', value: '~$2.06 million' },
+    { usd: 2060000, label: 'A whole working life in Belgium: 35.7 years of average full-time pay [[eurostat]]', value: '~$2.06 million' },
     { usd: 1e9, label: 'One billion dollars. Keep this block in mind.', value: '$1,000,000,000', inside: '{blockLen}' }
   ],
 
@@ -200,7 +200,7 @@ window.DATA = {
     { at: 770e9, type: 'note', title: 'Almost there. This time for real.' }
   ],
 
-  outro: `<p>You just scrolled past {barPx} pixels. On a normal screen, that bar is about {barMetres} metres long. Scrolling it without a single stop takes {barTime}.</p>
+  outro: `<p>You just scrolled past {barPx} pixels. On a normal screen, that bar is about {barMetres} metres long.</p>
 <p>Nobody earns this by working. On a typical Belgian wage, it would take about {yearsOfWork} years.</p>
 <p>We could have funded malaria, vaccines, AIDS and TB treatment, all of the UN's humanitarian aid, a year of USAID, five years against hunger and a year of clean water for the world, and he would still be the richest person alive.</p>
 <p>No single person needs this much. And no society needs to let it pile up like this.</p>`,
@@ -256,23 +256,23 @@ window.DATA = {
         link: { text: 'Find your MP', url: 'https://www.dekamer.be/' }, link2: { text: 'Follow the campaign', url: 'https://taxjustice.net/' } },
       { time: '1 year', title: 'Try giving 1%', html: 'A trial pledge: you choose the percentage and for how long, from six months to five years. See how it feels before you go further. [[gwwc]]',
         link: { text: 'Start a trial pledge', url: 'https://www.givingwhatwecan.org/pledge' } },
-      { time: 'A working life', title: 'Give 10%, for good', html: '11,494 people in 122 countries have made this promise. Together they have given more than $500 million. [[gwwc]] [[gwwc-total]]',
+      { time: 'A working life', title: 'Give 10%, for good', html: '11,494 people in 122 countries have made this promise. Giving What We Can\'s wider community of about 20,000 pledgers and donors has given more than $500 million. [[gwwc]] [[gwwc-total]]',
         link: { text: 'Take the 10% pledge', url: 'https://www.givingwhatwecan.org/pledge' }, primary: true }
     ]
   },
 
-  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] The euro switch converts every amount at that same rate, including older figures; amounts in international dollars (adjusted for local prices) and quotes stay in dollars. Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Scrolling times assume the steady 1× pace of the Scroll for me button, 220 pixels a second. Costs are shown with their own time span: per year, per period, or one-off.`,
+  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] The euro switch converts every amount at that same rate, including older figures; amounts in international dollars (adjusted for local prices) and quotes stay in dollars. Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
 
   sources: [
     { id: 'forbes-rt', text: 'Forbes Real-Time Billionaires, snapshot 25 November 2026, 06:50 UTC.', url: 'https://www.forbes.com/real-time-billionaires/' },
-    { id: 'bloomberg-trillion', text: 'Bloomberg Law, "Elon Musk becomes world\'s first trillionaire after SpaceX IPO", 12 June 2026.', url: 'https://news.bloomberglaw.com/banking-law/elon-musk-becomes-worlds-first-trillionaire-after-spacex-ipo' },
+    { id: 'bloomberg-trillion', text: 'Bloomberg Law, "Elon Musk becomes world\'s first trillionaire after SpaceX IPO", 12 June 2026: "His fortune now stands at the once-unimaginable figure of $1.1 trillion, according to the Bloomberg Billionaires Index."', url: 'https://news.bloomberglaw.com/banking-law/elon-musk-becomes-worlds-first-trillionaire-after-spacex-ipo' },
     { id: 'bloomberg-2025', text: 'Bloomberg Billionaires Index, year-end 2025 report: "Elon Musk saw the largest increase, with his fortune jumping $190.3 billion to $622.7 billion" (via TBS News).', url: 'https://www.tbsnews.net/world/global-economy/worlds-500-richest-add-record-22tn-2025-wealth-gap-widens-1327366' },
     { id: 'statbel', text: 'Statbel, Overview of Belgian wages and salaries (October 2022): median gross monthly wage of full-time employees EUR 3,728. Annualised x 12.92 incl. double holiday pay.', url: 'https://statbel.fgov.be/en/themes/work-training/wages-and-labourcost/overview-belgian-wages-and-salaries' },
     { id: 'cnt', text: 'National Labour Council (CNT/NAR), guaranteed average minimum monthly income EUR 2,189.81 from April 2026, x 12.', url: 'https://cnt-nar.be/sites/default/files/press_releases/nl/2026-03-24-N_1.pdf' },
     { id: 'fednot', text: 'Fednot, Property barometer Q3 2026: average house price EUR 360,613 (January to September 2026).', url: 'https://www.fednot.be/nl/nieuws/vastgoedbarometer-3de-trimester-2026-afkoelende-markt-prijzen-nog-lichtjes-in-de-lift/' },
     { id: 'eurostat', text: 'Eurostat, Duration of working life, Belgium, 2025: 35.7 years. Multiplied by the average full-time gross annual wage (EUR 52,662, Statbel 2022 incl. holiday pay).', url: 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_dwl_a?geo=BE&lang=en' },
     { id: 'wb-gni', text: 'World Bank, World Development Indicators: GNI per capita, Atlas method (current US$), 2025 (updated 11 November 2026). Burundi 240, Madagascar 560, Mozambique 570, Malawi 600, Niger 750, Sierra Leone 830, India 2,760, sub-Saharan Africa 1,610, low-income countries 811. This is national income divided by everyone, children included, not a wage.', url: 'https://data.worldbank.org/indicator/NY.GNP.PCAP.CD' },
-    { id: 'wb-gdp', text: 'World Bank, World Development Indicators: GDP (current US$) and population, 2025 (updated 11 November 2026). Burundi $3.36 bn, 14.4 m; Malawi $14.9 bn, 22.2 m; Haiti $32.1 bn, 11.9 m; Uganda $62.0 bn, 51.4 m; DR Congo $91.0 bn, 112.8 m; Ethiopia $126.4 bn, 135.5 m; Kenya $135.9 bn, 57.5 m; Nigeria $290.8 bn, 237.5 m; Bangladesh $456.3 bn, 175.7 m; the 25 low-income countries $642.7 bn, 767.5 m.', url: 'https://data.worldbank.org/indicator/NY.GDP.MKTP.CD' },
+    { id: 'wb-gdp', text: 'World Bank, World Development Indicators: GDP (current US$) and population, 2025 (updated 11 November 2026). Burundi $3.36 bn, 14.4 m; Malawi $14.9 bn, 22.2 m; Haiti $32.1 bn, 11.9 m; Uganda $62.0 bn, 51.4 m; DR Congo $91.0 bn, 112.8 m; Ethiopia $126.4 bn, 135.5 m; Kenya $135.9 bn, 57.5 m; Sierra Leone population 8.8 m; Nigeria $290.8 bn, 237.5 m; Bangladesh $456.3 bn, 175.7 m; the 25 low-income countries $642.7 bn, 767.5 m.', url: 'https://data.worldbank.org/indicator/NY.GDP.MKTP.CD' },
     { id: 'wb-poverty', text: 'World Bank, Poverty and Inequality Platform (release September 2026): 816,938,142 people below the $3.00-a-day line (2021 PPP), 2025 nowcast.', url: 'https://pip.worldbank.org/' },
     { id: 'wb-median', text: 'Our calculation on World Bank Poverty and Inequality Platform data: the line at which half the world falls below it is about $9.20 a day in 2024 (2021 PPP, income or consumption per person).', url: 'https://pip.worldbank.org/' },
     { id: 'beasley', text: 'Reason, 6 November 2021: in a tweet responding to Musk, WFP chief David Beasley wrote "$6B will not solve world hunger, but it WILL prevent geopolitical instability, mass migration and save 42 million people on the brink of starvation."', url: 'https://reason.com/2021/11/06/united-nations-official-suggests-elon-musk-donation-could-solve-global-hunger-kinda/' },

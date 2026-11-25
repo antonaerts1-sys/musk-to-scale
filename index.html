@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=14">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 
@@ -29,8 +29,8 @@
   <div class="hud-right">
     <span class="hud-scale">1 px = $1,000</span>
     <div class="cur" role="group" aria-label="Show amounts in">
-      <button type="button" data-cur="usd" aria-pressed="false">$</button>
-      <button type="button" data-cur="eur" aria-pressed="true">&euro;</button>
+      <button type="button" data-cur="usd" aria-pressed="true">$</button>
+      <button type="button" data-cur="eur" aria-pressed="false">&euro;</button>
     </div>
   </div>
 </header>
@@ -40,7 +40,17 @@
   <div class="big-value"></div>
   <div class="big-of"></div>
 </div>
-<div class="trip-toast" role="status" aria-live="polite"></div>
+<div class="skip-flow" role="status" aria-live="polite" hidden>
+  <div class="sf-inner">
+    <div class="sf-label">You skipped</div>
+    <div class="sf-m">0 m</div>
+    <div class="sf-pos">0 pixels</div>
+    <div class="sf-track"><i class="sf-done"></i><i class="sf-run"></i></div>
+    <div class="sf-scale"><span>Start of the bar</span><span>End: <span class="sf-total"></span></span></div>
+    <p class="sf-text"></p>
+    <div class="sf-hint">Click anywhere to continue</div>
+  </div>
+</div>
 <a class="skip-chip" href="#" data-jump="214e9">Seen enough? Skip to what it could pay for <span aria-hidden="true">&#8594;</span></a>
 
 <nav class="dock" aria-label="Move through the page">
@@ -135,14 +145,14 @@
       <p class="method" id="method"></p>
       <ol id="sources"></ol>
       <p class="credit">Photos via Wikimedia Commons, resized: Elon Musk by <a href="https://commons.wikimedia.org/wiki/File:Elon_Musk_2015.jpg">Steve Jurvetson</a> (CC BY 2.0); Jeff Bezos by <a href="https://commons.wikimedia.org/wiki/File:Jeff_Bezos%27_iconic_laugh_crop.jpg">Steve Jurvetson, crop by King of Hearts</a> (CC BY 2.0); Mark Zuckerberg by <a href="https://commons.wikimedia.org/wiki/File:Mark_Zuckerberg_F8_2018_Keynote_(cropped).jpg">Anthony Quintano</a> (CC BY 2.0); children under a mosquito net in Mwanza, Tanzania, by the <a href="https://commons.wikimedia.org/wiki/File:Net_Distribution_In_Mwanza,_Tanzania_2016_(31827023401).jpg">President's Malaria Initiative</a> (public domain); a village water pump in Rwanda by <a href="https://commons.wikimedia.org/wiki/File:Water_pump_in_Village_from_Rwanda.jpg">Rwejo</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>). Icons: Lucide (ISC) and Simple Icons (CC0).</p>
-      <p class="credit">Inspired by <a href="https://mkorostoff.github.io/1-pixel-wealth/">Wealth, shown to scale</a> by Matt Korostoff (2020), which did this for Jeff Bezos and the 400 richest Americans.</p>
+      <p class="credit">Inspired by <a href="https://web.archive.org/web/20250221135837/https://mkorostoff.github.io/1-pixel-wealth/">Wealth, shown to scale</a> by Matt Korostoff (2020, archived copy), which did this for Jeff Bezos and the 400 richest Americans.</p>
     </div>
   </section>
 
 </main>
 
-<script src="data.js?v=14"></script>
-<script src="cards.js?v=14"></script>
-<script src="main.js?v=14"></script>
+<script src="data.js?v=17"></script>
+<script src="cards.js?v=17"></script>
+<script src="main.js?v=17"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@
   },
   {
     "id": "yahoo-bloomberg-musk-stakes",
-    "text": "Yahoo Finance, How much of Elon Musk's wealth is in Tesla and SpaceX (Bloomberg and SEC figures), Nov 2026",
+    "text": "Yahoo Finance (TheStreet), How much of Elon Musk's wealth is in Tesla and SpaceX, 10 Nov 2026: stakes from SEC filings, Tesla $251 billion and SpaceX $859 billion including restricted shares; Bloomberg leaves restricted stock out and puts him at $845 billion.",
     "url": "https://finance.yahoo.com/markets/stocks/articles/much-elon-musk-wealth-tesla-000537126.html"
   },
   {
@@ -297,7 +297,7 @@
   },
   {
     "title": "SpaceX is the biggest piece",
-    "html": "By Bloomberg's count, his SpaceX shares were worth about $859 billion in early November 2026 and his Tesla shares about $251 billion. Both counts include restricted shares, so together they exceed estimates of his net worth. [[yahoo-bloomberg-musk-stakes]] In February 2026 SpaceX took over his AI company, xAI. [[forbes-xai-800b]]"
+    "html": "Counted from SEC filings, his SpaceX shares were worth about $859 billion in early November 2026 and his Tesla shares about $251 billion. Both counts include restricted shares, so together they exceed estimates of his net worth. [[yahoo-bloomberg-musk-stakes]] In February 2026 SpaceX took over his AI company, xAI. [[forbes-xai-800b]]"
   },
   {
     "title": "From $2 billion to $185 billion",
@@ -358,8 +358,8 @@
     "html": "In March 2026 Forbes counted a record 3,428 billionaires, worth $20.1 trillion together. A year earlier that total was $16.1 trillion. The group's wealth jumped by about $4 trillion in a year. [[forbes-pr-2026]] [[ap-forbes-2026]]"
   },
   {
-    "title": "The richest person keeps getting richer",
-    "html": "Bill Gates briefly passed $100 billion in 1999. In 2018, Bloomberg put Jeff Bezos above $150 billion. In March 2026, Forbes valued Elon Musk at $839 billion. Today, Forbes says $816.9 billion. [[bloomberg-2018]] [[ap-forbes-2026]] [[forbes-rt]]"
+    "title": "Each record is bigger than the last",
+    "html": "In 2018, Bloomberg put Jeff Bezos above $150 billion. In March 2026, Forbes valued Elon Musk at $839 billion. Today, Forbes says $816.9 billion. [[bloomberg-2018]] [[ap-forbes-2026]] [[forbes-rt]]"
   },
   {
     "title": "In 2025, the richest 500 gained $2.2 trillion",

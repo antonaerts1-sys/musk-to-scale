@@ -72,19 +72,27 @@ a:hover { color: var(--accent); }
 .big-of { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 8px; }
 .big-counter.fast .big-of { color: var(--accent); font-weight: 600; }
 
-/* after a jump: how much bar you skipped */
-.trip-toast {
-  position: fixed; z-index: 11;
-  left: 50%; bottom: calc(var(--dock-h) + 16px);
-  width: max-content; max-width: min(520px, calc(100vw - 32px));
-  transform: translate(-50%, 12px);
-  padding: 12px 16px;
-  background: var(--ink); color: var(--paper);
-  font-size: 15px; line-height: 1.4;
-  pointer-events: none; opacity: 0;
-  transition: opacity 0.25s, transform 0.25s;
+/* jumping ahead: the distance you skip, shown on its own for a moment */
+.skip-flow {
+  position: fixed; inset: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+  background: var(--paper); color: var(--ink);
+  opacity: 0; transition: opacity 0.3s;
+  cursor: pointer;
 }
-.trip-toast.on { opacity: 1; transform: translate(-50%, 0); }
+.skip-flow.on { opacity: 1; }
+.sf-inner { width: min(880px, 100%); display: flex; flex-direction: column; gap: 10px; }
+.sf-label { font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.sf-m { font-size: clamp(64px, 14vw, 180px); line-height: 0.95; font-weight: 800; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; color: var(--accent); }
+.sf-pos { font-family: var(--mono); font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sf-track { position: relative; height: 28px; margin-top: 28px; background: var(--line); }
+.sf-track i { position: absolute; top: 0; bottom: 0; left: 0; display: block; }
+.sf-done { background: var(--muted); }
+.sf-run { background: var(--accent); }
+.sf-scale { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.sf-text { margin: 18px 0 0; font-size: 20px; line-height: 1.4; max-width: 34em; min-height: 2.8em; }
+.sf-hint { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
 
 /* dock: autoscroll and the chapters */
 .dock {
@@ -379,6 +387,21 @@ a:hover { color: var(--accent); }
   .outro h2, .peers h2, .act h2 { font-size: 38px; }
 }
 
+/* short laptop screens: the bar drops to the dock so the counter keeps its room */
+@media (max-height: 790px) {
+  .h .bar-section { align-self: flex-end; margin-bottom: 40px; }
+  .h .big-value { font-size: 30px; }
+}
+@media (max-height: 740px) {
+  .h .bar-section { margin-bottom: 0; }
+  .h .ruler { display: none; }
+}
+@media (max-height: 690px) {
+  .h .big-counter { top: calc(var(--hud-h) + 6px); }
+  .h .big-of { display: none; }
+  .h .big-value { font-size: 26px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-hint span { animation: none; }
   .race-fill, .gauge-part.now, .race-passed, .people i { transition: none; }
@@ -459,7 +482,6 @@ html.v { overflow-x: hidden; }
 .v .big-value { font-size: clamp(24px, 8.6vw, 34px); }
 .v .big-of { font-size: 11px; margin-top: 4px; }
 .v .skip-chip { right: 16px; left: 16px; text-align: center; bottom: calc(var(--dock-h) + var(--counter-h) + 12px); }
-.v .trip-toast { bottom: calc(var(--dock-h) + var(--counter-h) + 12px); font-size: 14px; }
 .v .dock { padding: 0 12px; gap: 0; border-top: 1px solid var(--line); }
 .v .dock-buttons { width: 100%; }
 .v .rail { display: none; }
