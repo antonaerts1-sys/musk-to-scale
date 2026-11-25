@@ -115,11 +115,17 @@ a:hover { color: var(--accent); }
   height: var(--bar-h);
   background: var(--accent);
   color: var(--accent-ink);
+  display: flex;
+  align-items: flex-end;
 }
+/* the name rides along in the bottom-left corner, like the original */
 .bar-name {
-  position: absolute;
-  left: 32px; bottom: 28px;
+  position: sticky;
+  left: 32px;
+  z-index: 3;
+  margin: 0 0 28px 32px;
   font-size: 32px; font-weight: 800; letter-spacing: -0.01em;
+  pointer-events: none;
 }
 .ruler {
   position: absolute;
@@ -139,46 +145,30 @@ a:hover { color: var(--accent); }
   white-space: nowrap;
 }
 
-/* Notes inside the bar */
-.note {
-  position: absolute;
-  top: 36px;
-  width: 440px;
+/* Texts inside the bar.
+   Each text owns a stretch of the bar (a zone) and stays centred on screen
+   while you scroll through it, the way the original page does it. */
+.zone {
+  position: absolute; top: 0; bottom: 0;
+  overflow: clip;
+}
+.zone.milestone { border-left: 2px solid var(--paper); }
+.zone-inner, .seg-inner {
+  position: sticky;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  padding-top: 40px;
   display: flex; flex-direction: column; gap: 10px;
 }
-.note.low { top: auto; bottom: 36px; }
-.note-title { font-size: 26px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
-.note-text { font-size: 17px; line-height: 1.45; }
-.note-text p { margin: 0 0 10px; }
-.note sup a, .seg sup a, .outro sup a, .peers sup a, .act sup a { text-decoration: none; font-family: var(--mono); font-size: 0.7em; padding-left: 1px; }
-.note sup a:hover, .seg sup a:hover { color: var(--ink); }
-
-/* To-scale shapes inside the bar */
-.shape {
-  position: absolute;
-  bottom: 0;
-  background: var(--paper);
-}
-.shape-label {
-  position: absolute;
-  bottom: 0;
-  width: 300px;
-  font-size: 15px; line-height: 1.35;
-}
-.shape-label .v { display: block; font-family: var(--mono); font-size: 12px; opacity: 0.85; margin-top: 4px; }
-
-/* Milestones: you just passed X */
-.milestone {
-  position: absolute; top: 0; bottom: 0;
-  border-left: 2px solid var(--paper);
-}
-.milestone-label {
-  position: absolute; left: 12px; bottom: 28px;
-  width: 320px;
-  font-size: 15px; line-height: 1.35;
-}
-.milestone-label strong { display: block; font-size: 19px; }
-.milestone-label .v { display: block; font-family: var(--mono); font-size: 12px; margin-top: 4px; opacity: 0.85; }
+.zone-kicker, .seg-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+.zone-value, .seg-cost { font-family: var(--mono); font-size: 14px; }
+.note-title, .seg-title { font-size: 28px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+.note-text, .seg-text { font-size: 17px; line-height: 1.45; }
+.note-text p, .seg-text p { margin: 0 0 10px; }
+.shape { background: var(--paper); }
+.zone sup a, .seg sup a, .outro sup a, .peers sup a, .act sup a { text-decoration: none; font-family: var(--mono); font-size: 0.7em; padding-left: 1px; }
+.zone sup a:hover, .seg sup a:hover { color: var(--ink); }
 
 /* Spending segments */
 .seg {
@@ -187,18 +177,6 @@ a:hover { color: var(--accent); }
   background: var(--accent-deep);
 }
 .seg.alt { background: #9C1A0E; }
-.seg-inner {
-  position: sticky;
-  left: 32px;
-  width: 460px;
-  padding: 36px 0 0 32px;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.seg-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
-.seg-title { font-size: 26px; font-weight: 700; line-height: 1.15; }
-.seg-cost { font-family: var(--mono); font-size: 14px; }
-.seg-text { font-size: 16px; line-height: 1.45; }
-.seg-text p { margin: 0 0 10px; }
 
 /* ---------- Outro / peers / act / sources ---------- */
 .outro, .peers, .act, .colophon {
@@ -261,9 +239,10 @@ a:hover { color: var(--accent); }
   .hud-counter-value { font-size: 13px; }
   .intro { width: 100vw; padding: 0 16px; }
   .lede { font-size: 18px; }
-  .note, .seg-inner { width: 300px; }
-  .note-title, .seg-title { font-size: 21px; }
+  .zone-inner, .seg-inner { width: calc(100vw - 48px); max-width: 340px; padding-top: 28px; }
+  .note-title, .seg-title { font-size: 22px; }
   .note-text, .seg-text { font-size: 15px; }
+  .bar-name { font-size: 24px; left: 16px; margin-left: 16px; }
   .outro { width: 100vw; padding: 24px 16px; }
   .peers { width: 100vw; padding: 24px 16px; }
   .peer { grid-template-columns: minmax(0, 1fr); gap: 4px; }

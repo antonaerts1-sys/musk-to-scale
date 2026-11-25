@@ -29,8 +29,7 @@ window.DATA = {
 
     { at: 4.2e9, type: 'square', usd: 2060000, label: 'Remember the working life? Here it is again, inside his fortune.' },
 
-    { at: 6.6e9, type: 'milestone', title: 'The famine plan he asked for', value: '$6.6 billion, 2021' },
-    { at: 6.62e9, type: 'note',
+    { at: 6.6e9, type: 'milestone', title: 'The famine plan he asked for', value: '$6.6 billion, 2021',
       html: `<p>In late 2021 the UN World Food Programme asked billionaires for $6.6 billion to keep 42 million people from famine for a year. Musk tweeted that if WFP could explain how $6 billion would solve world hunger, he would sell Tesla stock and do it. [[fortune-2021]] WFP published the plan. [[wfp]]</p><p>A few weeks later he gave away about $5.7 billion in Tesla shares. In 2022 Bloomberg reported that the gift went to his own foundation. [[fortune-2022]]</p>` },
 
     { at: 9.0e9, type: 'milestone', title: 'The richest person in Belgium', value: 'Eric Wittouck, $9.0 billion',
@@ -42,8 +41,7 @@ window.DATA = {
     { at: 16.338e9, type: 'milestone', title: 'A 2% tax', value: '$16.3 billion a year',
       html: 'A yearly 2% tax on this one fortune would raise about this much. That is the rate economists proposed to the G20. [[zucman]]' },
 
-    { at: 35e9, type: 'milestone', title: "USAID's yearly budget", value: 'more than $35 billion, 2024 [[crs]]' },
-    { at: 35.02e9, type: 'note',
+    { at: 35e9, type: 'milestone', title: "USAID's yearly budget", value: 'more than $35 billion, 2024 [[crs]]',
       html: `<p>In February 2025, while leading DOGE, Musk wrote that "USAID is a criminal organization." [[hill]] By July 2025 the agency had effectively shut down. [[time]]</p><p>A study in The Lancet estimates the aid cuts could cause about 14 million extra deaths by 2030, 4.5 million of them children under five. [[lancet]]</p>` },
 
     { at: 44e9, type: 'milestone', title: 'Twitter', value: '$44 billion, 2022',

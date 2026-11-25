@@ -85,33 +85,38 @@
   var barW = Math.round(x(D.netWorth));
   bar.style.width = barW + 'px';
 
-  D.story.concat(D.tail || []).forEach(function (s) {
+  // Every text in the bar owns a stretch of it (a "zone"), from its own position
+  // to the next text. Inside its zone the text sticks to the left of the screen,
+  // so you can keep scrolling while you read; the next text takes over.
+  var items = D.story.concat(D.tail || []).slice().sort(function (a, b) { return a.at - b.at; });
+  items.forEach(function (s, i) {
+    var next = items[i + 1] ? items[i + 1].at : D.netWorth;
+    if (D.spendStart != null && s.at < D.spendStart) next = Math.min(next, D.spendStart);
     var left = Math.round(x(s.at));
+    var width = Math.max(40, Math.round(x(next)) - left);
     tokens.here = (s.at / D.netWorth * 100).toFixed(1) + '%';
-    if (s.type === 'note') {
-      var n = el('div', 'note' + (s.low ? ' low' : ''));
-      n.style.left = left + 'px';
-      if (s.title) n.appendChild(el('div', 'note-title', fill(s.title)));
-      if (s.html) n.appendChild(el('div', 'note-text', fill(s.html)));
-      bar.appendChild(n);
-    } else if (s.type === 'square') {
-      var w, h;
-      if (side(s.usd) <= BAR_H - 120) { w = h = side(s.usd); }
-      else { h = BAR_H - 120; w = Math.round(s.usd / PX_USD / h); }
-      var sh = el('div', 'shape');
-      sh.style.left = left + 'px';
-      sh.style.width = w + 'px';
-      sh.style.height = h + 'px';
-      bar.appendChild(sh);
-      var lab = el('div', 'shape-label', fill(s.label) + '<span class="v">' + fill(s.value || short(s.usd)) + '</span>');
-      lab.style.left = (left + w + 16) + 'px';
-      bar.appendChild(lab);
-    } else if (s.type === 'milestone') {
-      var m = el('div', 'milestone');
-      m.style.left = left + 'px';
-      m.appendChild(el('div', 'milestone-label', '<strong>' + fill(s.title) + '</strong>' + fill(s.html || '') + '<span class="v">' + fill(s.value || short(s.at)) + '</span>'));
-      bar.appendChild(m);
+
+    var zone = el('div', 'zone' + (s.type === 'milestone' ? ' milestone' : ''));
+    zone.style.left = left + 'px';
+    zone.style.width = width + 'px';
+    var inner = el('div', 'zone-inner');
+
+    if (s.type === 'square') {
+      var sq = el('div', 'shape');
+      var sd = side(s.usd);
+      sq.style.width = sd + 'px';
+      sq.style.height = sd + 'px';
+      inner.appendChild(sq);
+      inner.appendChild(el('div', 'note-text', fill(s.label)));
+      inner.appendChild(el('div', 'zone-value', fill(s.value || short(s.usd))));
+    } else {
+      if (s.type === 'milestone') inner.appendChild(el('div', 'zone-kicker', 'You just passed'));
+      if (s.title) inner.appendChild(el('div', 'note-title', fill(s.title)));
+      if (s.type === 'milestone') inner.appendChild(el('div', 'zone-value', fill(s.value || short(s.at))));
+      if (s.html) inner.appendChild(el('div', 'note-text', fill(s.html)));
     }
+    zone.appendChild(inner);
+    bar.appendChild(zone);
   });
 
   // spending segments run back to back up to the end of the bar
