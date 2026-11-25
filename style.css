@@ -65,11 +65,11 @@ a:hover { color: var(--accent); }
 .big-counter.on { opacity: 1; }
 .big-label { display: none; }
 .big-value {
-  font-size: clamp(28px, min(calc((100vh - var(--hud-h) - var(--dock-h) - var(--bar-t)) / 2 - 36px), 6.2vw), 100px);
-  line-height: 0.92; font-weight: 800; letter-spacing: -0.04em;
+  font-size: clamp(28px, min(calc((100vh - var(--hud-h) - var(--dock-h) - var(--bar-t)) / 2 - 52px), 6.2vw), 100px);
+  line-height: 1.05; font-weight: 800; letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
-.big-of { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 6px; }
+.big-of { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 8px; }
 
 /* dock: autoscroll and the chapters */
 .dock {
