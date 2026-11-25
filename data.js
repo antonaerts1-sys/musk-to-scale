@@ -200,7 +200,7 @@ window.DATA = {
     { at: 770e9, type: 'note', title: 'Almost there. This time for real.' }
   ],
 
-  outro: `<p>You just scrolled past {barPx} pixels. On a normal screen, that bar is about {barMetres} metres long.</p>
+  outro: `<p>You just scrolled past {barPx} pixels. On a normal screen, that bar is about {barMetres} metres long. Scrolling it without a single stop takes {barTime}.</p>
 <p>Nobody earns this by working. On a typical Belgian wage, it would take about {yearsOfWork} years.</p>
 <p>We could have funded malaria, vaccines, AIDS and TB treatment, all of the UN's humanitarian aid, a year of USAID, five years against hunger and a year of clean water for the world, and he would still be the richest person alive.</p>
 <p>No single person needs this much. And no society needs to let it pile up like this.</p>`,
@@ -261,7 +261,7 @@ window.DATA = {
     ]
   },
 
-  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] The euro switch converts every amount at that same rate, including older figures; amounts in international dollars (adjusted for local prices) and quotes stay in dollars. Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Costs are shown with their own time span: per year, per period, or one-off.`,
+  method: `One pixel is $1,000. The bar is {barT} pixels {thickWord}, so each pixel you scroll {dirWord} is {perPx}. Musk's net worth is the Forbes Real-Time estimate of {netWorthFull} on {asOf}; it moves by billions a day. Belgian amounts are converted from euros at the ECB reference rate of 24 November 2026, 1 EUR = 1.0963 USD. [[ecb]] The euro switch converts every amount at that same rate, including older figures; amounts in international dollars (adjusted for local prices) and quotes stay in dollars. Belgian pay is Statbel's latest full-time median gross monthly wage (October 2022) including double holiday pay, excluding the end-of-year bonus. Lengths assume a standard screen of 96 pixels per inch. Scrolling times assume the steady 1× pace of the Scroll for me button, 220 pixels a second. Costs are shown with their own time span: per year, per period, or one-off.`,
 
   sources: [
     { id: 'forbes-rt', text: 'Forbes Real-Time Billionaires, snapshot 25 November 2026, 06:50 UTC.', url: 'https://www.forbes.com/real-time-billionaires/' },

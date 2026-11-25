@@ -77,6 +77,8 @@
   tokens.netWorthFull = money.format(D.netWorth);
   tokens.barPx = Math.round(x(D.netWorth)).toLocaleString('en-US');
   tokens.barMetres = Math.round(x(D.netWorth) * 0.0254 / 96).toLocaleString('en-US');
+  var barMin = Math.round(x(D.netWorth) / 220 / 60); // at the 1x pace of "Scroll for me"
+  tokens.barTime = (barMin >= 60 ? Math.floor(barMin / 60) + ' hours' + (barMin % 60 ? ' and ' + barMin % 60 + ' minutes' : '') : barMin + ' minutes').replace(/^1 hours/, '1 hour');
   tokens.spent = short(spent);
   tokens.remaining = short(remaining);
   tokens.spentPct = (spent / D.netWorth * 100).toFixed(0) + '%';
@@ -543,6 +545,20 @@
     var v = cur === 'eur' ? usd / RATE : usd;
     return (cur === 'eur' ? '€' : '$') + (Math.round(v / 1e6) * 1e6).toLocaleString('en-US');
   }
+  // distance and time, so fast scrolling keeps its sense of scale
+  var M_PER_PX = 0.0254 / 96, PACE = 220; // a standard screen; px per second at 1x
+  function metres(px) {
+    var m = px * M_PER_PX;
+    return m < 1 ? Math.round(m * 100) + ' cm' : Math.round(m).toLocaleString('en-US') + ' m';
+  }
+  function duration(px) {
+    var s = Math.round(px / PACE);
+    if (s < 60) return s + ' seconds';
+    var min = Math.round(s / 60);
+    if (min < 60) return min + (min === 1 ? ' minute' : ' minutes');
+    var h = Math.floor(min / 60), rest = min % 60;
+    return h + ' h' + (rest ? ' ' + rest + ' min' : '');
+  }
 
   // ---- scroll: counter, progress, chapters ----
   var bigBox = document.querySelector('.big-counter');
@@ -574,6 +590,7 @@
   var navEls = [];
   function jumpTo(item) {
     stopAuto();
+    var from = scrollPos();
     if (item.section) {
       var sec = document.getElementById(item.section);
       scrollToPos(V ? sec.offsetTop - 40 : sec.offsetLeft);
@@ -581,6 +598,7 @@
       scrollToPos(Math.max(0, bl + x(item.at) - (item.at ? screenLen() * 0.2 : screenLen() * 0.4)));
     }
     closeSheet();
+    tripSkip(from, scrollPos());
   }
   nav.forEach(function (item, k) {
     var nextAt = nav[k + 1] && !nav[k + 1].section ? nav[k + 1].at : D.netWorth;
@@ -610,7 +628,14 @@
     var inBar = pos > 0 && pos * USD_PER_X < D.netWorth;
     bigBox.classList.toggle('on', inBar || (V && pos * USD_PER_X < D.netWorth));
     bigValue.textContent = full(usd);
-    bigOf.textContent = 'of ' + full(D.netWorth) + ' · ' + (usd / D.netWorth * 100).toFixed(1) + '%';
+    var gone = Math.max(0, Math.min(barPx, pos));
+    if (fastUntil > performance.now()) {
+      bigOf.textContent = metres(gone) + ' of ' + metres(barPx) + ' · ' + duration(gone) + ' of scrolling';
+      bigBox.classList.add('fast');
+    } else {
+      bigOf.textContent = 'of ' + full(D.netWorth) + ' · ' + (usd / D.netWorth * 100).toFixed(1) + '%';
+      bigBox.classList.remove('fast');
+    }
     prog.classList.toggle('on', pos > 0);
     progFill.style.width = (usd / D.netWorth * 100).toFixed(3) + '%';
     // people grid fills as you scroll through its stretch
@@ -629,9 +654,34 @@
     });
     navEls.forEach(function (pair, k) { pair.forEach(function (n) { n.classList.toggle('on', k === curK); }); });
   }
+  // scrolling fast, by hand or at 10x and 100x, switches the line under the counter
+  // from money to metres and minutes; it stays a moment after you slow down
+  var barPx = x(D.netWorth), fastUntil = 0, lastP = scrollPos(), lastPT = performance.now(), vel = 0;
+  var FAST = 1500; // px per second
   window.addEventListener('scroll', function () {
+    var now = performance.now(), p = scrollPos(), dt = (now - lastPT) / 1000;
+    if (dt > 0) {
+      vel = vel * 0.7 + Math.abs(p - lastP) / Math.max(dt, 0.008) * 0.3;
+      if (vel > FAST || (autoOn && SPEEDS[speedK] > 1)) fastUntil = now + 2500;
+    }
+    lastP = p; lastPT = now;
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
+  setInterval(function () { if (bigBox.classList.contains('fast') && fastUntil <= performance.now()) update(); }, 500);
+
+  // after a jump: how much bar you just skipped
+  var toast = document.querySelector('.trip-toast'), toastT = 0;
+  function tripSkip(a, b) {
+    var pa = Math.max(0, Math.min(barPx, a + screenLen() * 0.5 - bl));
+    var pb = Math.max(0, Math.min(barPx, b + screenLen() * 0.5 - bl));
+    var d = Math.abs(pb - pa);
+    if (d < screenLen() * 2) return;
+    toast.innerHTML = '<strong>You ' + (pb > pa ? 'skipped' : 'went back') + ' ' + metres(d) + ' of bar.</strong> ' +
+      (pb > pa ? 'Scrolling it would have taken ' : 'That is ') + duration(d) + (pb > pa ? '.' : ' of scrolling.');
+    toast.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toast.classList.remove('on'); }, 5000);
+  }
 
   // ---- autoscroll: let the page scroll for you, faster if you like ----
   var autoBtn = document.querySelector('.auto-btn');
