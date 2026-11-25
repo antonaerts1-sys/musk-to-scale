@@ -20,7 +20,6 @@ window.DATA = {
     lifetime: 2060000,    // Belgian working life [[eurostat]]
     population: 11867634, // Belgium, 1 Jan 2026 (Statbel)
     oda: 2.72e9,          // Belgian development aid 2025 [[oda]]
-    health: 51.3e9,       // RIZIV budget 2026 [[riziv]]
     malariaGap: 5.4e9,    // WHO malaria funding gap per year [[who-malaria]]
     perDay: 521.4e6       // Musk's average gain per day in 2025 [[bloomberg-2025]]
   },
@@ -102,8 +101,6 @@ window.DATA = {
     { at: 2.72e9, type: 'milestone', icon: 'heart', title: "Belgium's development aid", value: '$2.72 billion, all of 2025',
       html: 'Everything Belgium spent on aid to other countries in a year. [[oda]]' },
 
-    { at: 4.2e9, type: 'square', usd: 2060000, label: 'Remember the working life? Here it is again, inside his fortune.' },
-
     { at: 6.6e9, type: 'milestone', icon: 'utensils', title: 'The famine plan he asked for', value: '$6.6 billion, 2021',
       html: '<p>In late 2021 the UN World Food Programme asked billionaires for $6.6 billion to keep 42 million people from famine for a year. Musk answered on Twitter. [[fortune-2021]]</p>' },
 
@@ -113,9 +110,6 @@ window.DATA = {
         { who: 'David Beasley, head of the WFP', meta: 'reply', text: '$6B will not solve world hunger, but it WILL prevent geopolitical instability, mass migration and save 42 million people on the brink of starvation.' }
       ],
       html: '<p>WFP published the plan. [[wfp]] A few weeks later Musk gave away about $5.7 billion in Tesla shares. In 2022 Bloomberg reported that the gift went to his own foundation. [[fortune-2022]] [[beasley]]</p>' },
-
-    { at: 9.0e9, type: 'milestone', icon: 'crown', title: 'The richest person in Belgium', value: 'Eric Wittouck, $9.0 billion',
-      html: 'You just scrolled past his entire fortune. [[forbes-be]]' },
 
     { at: 12e9, type: 'note', title: "OK, we're almost at the end now." },
     { at: 13.6e9, type: 'note', title: 'Just kidding.', html: "You're {here} of the way. Keep scrolling." },
@@ -131,12 +125,6 @@ window.DATA = {
 
     { at: 44e9, type: 'milestone', icon: 'x', title: 'Twitter', value: '$44 billion, 2022',
       html: 'What he paid for the platform he later renamed X. [[twitter]]' },
-
-    { at: 51.3e9, type: 'milestone', icon: 'pill', title: 'Belgian health insurance, for a year', value: '$51.3 billion, 2026',
-      html: 'The entire 2026 budget for public health insurance in Belgium: every doctor visit, hospital stay and medicine it reimburses. [[riziv]]' },
-
-    { at: 55.1e9, type: 'milestone', icon: 'crown', title: 'All 18 Belgian billionaires, combined', value: '$55.1 billion',
-      html: 'Every billionaire in Belgium, put together. [[forbes-be]]' },
 
     { at: 75e9, type: 'note', title: 'Half a billion dollars a day.',
       html: 'In 2025 alone his fortune grew by $190 billion, about $521 million a day. [[bloomberg-2025]] That is a year of income for about 640,000 people in the world\'s poorest countries. Every single day. [[wb-gni]]' },
@@ -163,37 +151,37 @@ window.DATA = {
     { name: 'Where does it come from?', at: 55.1e9 },
     { name: 'How did we get here?', at: 139e9 },
     { name: 'Spend it on the world', at: 214e9 },
-    { name: 'Still his', at: 645e9 },
+    { name: 'Still his', at: 625e9 },
     { name: 'Public money, private fortune', at: 690e9 },
     { name: 'What can you do?', section: 'act' }
   ],
 
   spendStart: 232e9,
   spending: [
-    { icon: 'bug', photo: { src: 'img/nets.jpg', alt: 'Two children playing under a mosquito net, Mwanza, Tanzania', shape: 'wide' }, kicker: 'Malaria · 5 years', title: "Close the malaria funding gap until 2030", usd: 27e9, cost: '$5.4 billion a year x 5 = $27 billion',
+    { icon: 'bug', photo: { src: 'img/nets.jpg', alt: 'Two children playing under a mosquito net, Mwanza, Tanzania', shape: 'wide' }, kicker: 'Malaria · 5 years', title: "Close the malaria funding gap until 2030", usd: 27e9, cost: '$5.4 billion a year × 5 = $27 billion',
       html: '<p>Malaria killed 610,000 people in 2024. In Africa, about three in four were children under five. The WHO says funding falls about $5.4 billion a year short of what is needed. [[who-malaria]]</p>' },
 
-    { icon: 'syringe', kicker: 'Vaccines · 2026-2030', title: "Pay Gavi's full vaccine budget", usd: 11.9e9, cost: '$11.9 billion',
-      html: '<p>Gavi asked for $11.9 billion to vaccinate 500 million children and save at least 8 million lives in 2026-2030. Donors came up short. [[gavi]]</p>' },
+    { icon: 'syringe', kicker: 'Vaccines · 2026-2030', title: "Close Gavi's vaccine funding gap", usd: 2.9e9, cost: '$11.9 billion asked − $9 billion pledged = $2.9 billion',
+      html: '<p>Gavi asked for $11.9 billion to vaccinate 500 million children and save at least 8 million lives in 2026-2030. Donors pledged about $9 billion, so Gavi cut its plan to $10 billion. [[gavi]] [[gavi-board]] This pays for the rest.</p>' },
 
-    { icon: 'pill', kicker: 'AIDS, TB, malaria · 2027-2029', title: 'Fully fund the Global Fund', usd: 18e9, cost: '$18 billion',
-      html: '<p>The Global Fund asked for $18 billion, which it says would save 23 million lives. Donors pledged $12.64 billion. [[globalfund]]</p>' },
+    { icon: 'pill', kicker: 'AIDS, TB, malaria · 2027-2029', title: "Close the Global Fund's funding gap", usd: 5.36e9, cost: '$18 billion asked − $12.64 billion pledged = $5.4 billion',
+      html: '<p>The Global Fund asked for $18 billion, which it says would save 23 million lives. Donors pledged $12.64 billion. [[globalfund]] This pays for the rest.</p>' },
 
     { icon: 'users', kicker: 'Humanitarian aid · 2026', title: "Fund the UN's entire humanitarian appeal", usd: 33e9, cost: '$33 billion',
-      html: '<p>For 135 million people in 50 countries hit by war, disaster and hunger. In 2025, donors gave $12 billion, the lowest in a decade. [[un-gho]]</p>' },
+      html: '<p>For 135 million people hit by war, disaster and hunger. In 2025, donors gave $12 billion, the lowest in a decade. [[un-gho]]</p>' },
 
     { icon: 'globe', kicker: 'Foreign aid · 1 year', title: "Restore USAID's budget for a year", usd: 35e9, cost: '$35 billion',
       html: '<p>One year of what the agency managed before the 2025 cuts. [[crs]]</p>' },
 
-    { icon: 'utensils', kicker: 'Hunger · 5 years', title: 'Invest in ending hunger', usd: 165e9, cost: '$33 billion a year x 5 = $165 billion',
-      html: '<p>About 673 million people went hungry in 2024. [[fao]] Researchers estimated it takes an extra $33 billion a year, mostly invested in small farms, to end hunger by 2030. [[ceres]] This pays for five of those years.</p>' },
+    { icon: 'utensils', kicker: 'Hunger · 5 years', title: 'Invest in ending hunger', usd: 165e9, cost: '$33 billion a year × 5 = $165 billion',
+      html: '<p>About 673 million people went hungry in 2024. [[fao]] In 2020, researchers estimated it would take an extra $33 billion a year, mostly invested in small farms, to end hunger by 2030. [[ceres]] This pays for five of those years.</p>' },
 
     { icon: 'droplet', photo: { src: 'img/water.jpg', alt: 'Boys pumping water at a village pump in Rwanda', shape: 'wide' }, kicker: 'Water and toilets · 1 year', title: 'A year of building safe water and sanitation for everyone', usd: 114e9, cost: '$114 billion',
-      html: '<p>2.1 billion people lack safely managed drinking water and 3.4 billion lack safe sanitation. [[jmp]] The World Bank estimated the building cost of reaching everyone at about $114 billion a year until 2030. [[worldbank-water]] This is one full year of it.</p>' }
+      html: '<p>2.1 billion people lack safely managed drinking water and 3.4 billion lack safe sanitation. [[jmp]] In 2016, the World Bank estimated the building cost of reaching everyone at about $114 billion a year until 2030. [[worldbank-water]] This is one full year of it.</p>' }
   ],
 
   tail: [
-    { at: 645e9, type: 'note', title: 'All of that: {spent}.',
+    { at: 625e9, type: 'note', title: 'All of that: {spent}.',
       html: 'Malaria, vaccines, AIDS and TB, every UN humanitarian appeal, a year of USAID, five years against hunger, a year of water and toilets for the world.' },
     { at: 690e9, type: 'note', viz: 'drain', title: 'And he would still have {remaining}.',
       html: 'Everything in this bar that is not dark red. That is still more than Jeff Bezos ($371.7 billion). [[forbes-rt]] He would still be the richest person on Earth.' },
@@ -218,7 +206,6 @@ window.DATA = {
       { name: 'Larry Ellison', company: 'Oracle', usd: 147.8e9 },
       { name: 'Jensen Huang', company: 'Nvidia', usd: 135.5e9 },
       { name: 'Bill Gates', company: 'Microsoft', usd: 119.6e9 },
-      { name: 'A Belgian working life', company: 'for scale', usd: 2.06e6, value: '$2.06 million: too small to see' }
     ],
     note: 'Forbes Real-Time Billionaires, 25 November 2026, 06:50 UTC. Fortunes move by billions every day.'
   },
@@ -292,8 +279,6 @@ window.DATA = {
     { id: 'wb-pip', text: 'World Bank, Poverty and Inequality Platform: world population 8,210,628,561 (2025 nowcast).', url: 'https://pip.worldbank.org/' },
     { id: 'ecb', text: 'European Central Bank, euro reference rate USD, 24 November 2026: 1.0963.', url: 'https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2026-11-01&endPeriod=2026-11-25' },
     { id: 'oda', text: 'OECD preliminary ODA data 2025 for Belgium, USD 2.72 billion (0.37% of GNI), as reported by VRT NWS / Belga, 9 April 2026.', url: 'https://www.vrt.be/vrtnws/nl/2026/04/09/ontwikkelingshulp-daalt-wereldwijd-met-bijna-een-kwart-zegt-oes/' },
-    { id: 'forbes-be', text: 'Forbes World\'s Billionaires 2026: 18 Belgians worth USD 55.1 billion combined; richest Eric Wittouck at USD 9.0 billion (VRT NWS, 10-11 March 2026).', url: 'https://www.vrt.be/vrtnws/en/2026/03/11/18-belgians-on-forbes-billionaires-list-richest-belgian-is-wort.consumer/' },
-    { id: 'riziv', text: 'RIZIV/INAMI, the health insurance budget amounts to EUR 46.775 billion in 2026.', url: 'https://www.inami.fgov.be/nl/nieuws/de-begroting-van-de-ziekteverzekering-bedraagt-46-775-miljard-euro-in-2026' },
     { id: 'fortune-2021', text: 'Fortune, 1 November 2021: Musk says he will sell Tesla stock if WFP can explain how $6 billion would solve world hunger.', url: 'https://fortune.com/2021/11/01/elon-musk-net-worth-tesla-shares-hunger-tweet-world-food-program/' },
     { id: 'wfp', text: 'World Food Programme, "WFP\'s plan to support 42 million people on the brink of famine": "US$6.6 billion is needed to avert catastrophe", November 2021.', url: 'https://www.wfp.org/stories/wfps-plan-support-42-million-people-brink-famine' },
     { id: 'fortune-2022', text: 'Fortune, 12 December 2022, citing Bloomberg: the $5.7 billion of Tesla shares Musk gave in November 2021 went to the Musk Foundation.', url: 'https://fortune.com/2022/12/12/elon-musk-gave-5-7-billion-to-charity-last-year-where-it-went-was-a-mystery-until-now/' },
@@ -305,9 +290,10 @@ window.DATA = {
     { id: 'original', text: 'Matt Korostoff, "Wealth, shown to scale" (2020), which drew Jeff Bezos at $139 billion.', url: 'https://eattherichtextformat.github.io/1-pixel-wealth/' },
     { id: 'zucman', text: 'Gabriel Zucman, report for the Brazilian G20 presidency (June 2024): a 2% minimum tax on billionaires "would raise $200-$250 billion per year globally from about 3,000 individuals".', url: 'https://taxobservatory.world//www-site/uploads/2024/06/Zucman-Report-Executive-Summary-EN.pdf' },
     { id: 'who-malaria', text: 'WHO, World Malaria Report 2025: 610,000 deaths in 2024; USD 3.9 billion invested against a USD 9.3 billion target, a projected shortfall of about USD 5.4 billion.', url: 'https://www.who.int/news/item/04-12-2025-new-tools-saved-a-million-lives-from-malaria-last-year-but-progress-under-threat-as-drug-resistance-rises' },
-    { id: 'gavi', text: 'Gavi, the Vaccine Alliance: US$ 11.9 billion targeted budget for 2026-2030, to protect 500 million children and save at least 8 million lives.', url: 'https://www.gavi.org/news/media-room/world-leaders-recommit-immunisation-amid-global-funding-shortfall' },
+    { id: 'gavi', text: 'Gavi, the Vaccine Alliance: US$ 11.9 billion targeted budget for 2026-2030, to protect 500 million children and save at least 8 million lives; "more than US$ 9 billion secured against a targeted US$ 11.9 billion budget" (25 June 2025).', url: 'https://www.gavi.org/news/media-room/world-leaders-recommit-immunisation-amid-global-funding-shortfall' },
+    { id: 'gavi-board', text: 'Gavi, Board report on resource mobilisation, 1-2 July 2026: "Following US$ 9 billion in pledges secured at the June 2025 Global Summit, the Board agreed in July 2025 to a recalibrated expenditure target of US$ 10 billion."', url: 'https://www.gavi.org/news/document-library/05-resource-mobilisation-update-pdf' },
     { id: 'globalfund', text: 'The Global Fund, Eighth Replenishment: "needs US$18 billion to save 23 million lives between 2027 and 2029"; final outcome US$12.64 billion (February 2026).', url: 'https://www.theglobalfund.org/en/news/2026/2026-02-18-global-fund-board-welcomes-final-eighth-replenishment-outcome/' },
-    { id: 'un-gho', text: 'UN News, Global Humanitarian Overview 2026: $33 billion to reach 135 million people in 50 countries; $12 billion received in 2025.', url: 'https://news.un.org/en/story/2025/12/1166526' },
+    { id: 'un-gho', text: 'UN News, Global Humanitarian Overview 2026: $33 billion to reach 135 million people; the 2025 appeal received $12 billion, "the lowest funding in a decade".', url: 'https://news.un.org/en/story/2025/12/1166526' },
     { id: 'fao', text: 'FAO, The State of Food Security and Nutrition in the World 2025: 8.2% of the world population, about 673 million people, faced hunger in 2024.', url: 'https://www.fao.org/newsroom/detail/sofi-2025--fao-calls-for-urgent--coordinated-and-inclusive-action-to-end-global-hunger/en' },
     { id: 'ceres', text: 'Ceres2030 (IISD, IFPRI, Cornell), 2020: an extra $33 billion a year to end hunger by 2030.', url: 'https://www.ifpri.org/blog/big-costs-bigger-rewards-how-33-billion-in-spending-each-year-can-help-end-hunger-sustainably-2030' },
     { id: 'jmp', text: 'WHO/UNICEF Joint Monitoring Programme, August 2025: 2.1 billion people lack safely managed drinking water, 3.4 billion lack safely managed sanitation.', url: 'https://www.who.int/news/item/26-08-2025-1-in-4-people-globally-still-lack-access-to-safe-drinking-water---who--unicef' },
