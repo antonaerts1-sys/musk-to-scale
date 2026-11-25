@@ -11,6 +11,56 @@ window.DATA = {
     yearsOfWork: '15 million'   // 816.9e9 / 52,800 = 15.5 million years
   },
 
+  // Rhythm: a new text at least every ~4.5 desktop screens.
+  rhythm: { maxGapPx: 6500, minGapPx: 2400 },
+
+  // Base numbers for the computed progress cards (all sourced below).
+  base: {
+    wage: 52800,          // typical full-time gross pay, Belgium [[statbel]]
+    lifetime: 2060000,    // Belgian working life [[eurostat]]
+    population: 11867634, // Belgium, 1 Jan 2026 [[statbel-pop]]
+    oda: 2.72e9,          // Belgian development aid 2025 [[oda]]
+    health: 51.3e9,       // RIZIV budget 2026 [[riziv]]
+    malariaGap: 5.4e9,    // WHO malaria funding gap per year [[who-malaria]]
+    perDay: 521.4e6       // Musk's average gain per day in 2025 [[bloomberg-2025]]
+  },
+
+  progress: {
+    look: [
+      'That is {nWage} years of pay for a typical full-time worker in Belgium. [[statbel]]',
+      'Enough to give every person in Belgium {perPerson}. [[statbel-pop]]',
+      'That is {nLife} Belgian working lives, start to pension. [[eurostat]]',
+      "It would pay all of Belgium's development aid for {nOda} years. [[oda]]",
+      'Saving $1,000 a day, this stretch alone would take you {saveYears} years.',
+      'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]',
+      'That is {nHealth} years of Belgian public health insurance. [[riziv]]',
+      'It would close the malaria funding gap for {nMalaria} years. [[who-malaria]]'
+    ],
+    spend: [
+      '{blockTitle}. This block is drawn to scale too.',
+      'And he still has {leftHere}.',
+      'Every pixel of this dark block is $500,000 put to work.'
+    ],
+    tail: [
+      'Everything in this bar that is not dark red is still his.',
+      'That is still more than Jeff Bezos owns in total, $371.7 billion. [[forbes-rt]]',
+      'You have now scrolled past {soFar} of his fortune.',
+      'Saving $1,000 a day, the part you scrolled would take {saveYears} years.',
+      'In 2025 he gained this much in about {gainDays} days. [[bloomberg-2025]]'
+    ]
+  },
+
+  // Chapters of short explainer cards, spread evenly over their range of the bar.
+  chapters: [
+    { title: 'What a number this big means', from: 646e9, to: 688e9, cards: [
+      { title: 'Count it out loud', html: 'One dollar per second, day and night, no breaks. A million takes 11.6 days. A billion takes 31.7 years. His fortune would take about 25,900 years.' },
+      { title: 'Spend a million a day', html: 'If he spent $1 million every single day and earned nothing more, the money would last about 2,240 years.' },
+      { title: 'Save a thousand a day', html: 'Put $1,000 aside every day. To reach his fortune you would need about 2.2 million years.' },
+      { title: 'Share it with everyone', html: 'Split evenly over all 8.2 billion people on Earth, it comes to about $100 each. [[wb-pip]] For one person, it is all of that at once.' },
+      { title: 'A million is not a billion', html: 'A million dollars is a square of 32 by 32 pixels. A billion is a block of 2,000 by 500. This bar holds 817 of those blocks.' }
+    ] }
+  ],
+
   calibration: [
     { usd: 1000, label: '$1,000. That is this one pixel.', value: '1 px' },
     { usd: 28800, label: "A year on Belgium's minimum wage, before tax [[cnt]]", value: '~$28,800' },
@@ -150,6 +200,8 @@ window.DATA = {
     { id: 'cnt', text: 'National Labour Council (CNT/NAR), guaranteed average minimum monthly income EUR 2,189.81 from April 2026, x 12.', url: 'https://cnt-nar.be/sites/default/files/press_releases/nl/2026-03-24-N_1.pdf' },
     { id: 'fednot', text: 'Fednot, Property barometer Q3 2026: average house price EUR 360,613 (January to September 2026).', url: 'https://www.fednot.be/nl/nieuws/vastgoedbarometer-3de-trimester-2026-afkoelende-markt-prijzen-nog-lichtjes-in-de-lift/' },
     { id: 'eurostat', text: 'Eurostat, Duration of working life, Belgium, 2025: 35.7 years. Multiplied by the average full-time gross annual wage (EUR 52,662, Statbel 2022 incl. holiday pay).', url: 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_dwl_a?geo=BE&lang=en' },
+    { id: 'statbel-pop', text: 'Statbel, Structure of the population: 11,867,634 inhabitants on 1 January 2026.', url: 'https://statbel.fgov.be/en/themes/population/structure-population' },
+    { id: 'wb-pip', text: 'World Bank, Poverty and Inequality Platform: world population 8,210,628,561 (2025 nowcast).', url: 'https://pip.worldbank.org/' },
     { id: 'ecb', text: 'European Central Bank, euro reference rate USD, 24 November 2026: 1.0963.', url: 'https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2026-11-01&endPeriod=2026-11-25' },
     { id: 'oda', text: 'OECD preliminary ODA data 2025 for Belgium, USD 2.72 billion (0.37% of GNI), as reported by VRT NWS / Belga, 9 April 2026.', url: 'https://www.vrt.be/vrtnws/nl/2026/04/09/ontwikkelingshulp-daalt-wereldwijd-met-bijna-een-kwart-zegt-oes/' },
     { id: 'forbes-be', text: 'Forbes World\'s Billionaires 2026: 18 Belgians worth USD 55.1 billion combined; richest Eric Wittouck at USD 9.0 billion (VRT NWS, 10-11 March 2026).', url: 'https://www.vrt.be/vrtnws/en/2026/03/11/18-belgians-on-forbes-billionaires-list-richest-belgian-is-wort.consumer/' },

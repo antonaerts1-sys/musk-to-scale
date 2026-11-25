@@ -85,23 +85,124 @@
   var barW = Math.round(x(D.netWorth));
   bar.style.width = barW + 'px';
 
-  // Every text in the bar owns a stretch of it (a "zone"), from its own position
-  // to the next text. Inside its zone the text sticks to the left of the screen,
-  // so you can keep scrolling while you read; the next text takes over.
-  var items = D.story.concat(D.tail || []).slice().sort(function (a, b) { return a.at - b.at; });
-  items.forEach(function (s, i) {
-    var next = items[i + 1] ? items[i + 1].at : D.netWorth;
-    if (D.spendStart != null && s.at < D.spendStart) next = Math.min(next, D.spendStart);
-    var left = Math.round(x(s.at));
-    var width = Math.max(40, Math.round(x(next)) - left);
-    tokens.here = (s.at / D.netWorth * 100).toFixed(1) + '%';
+  // ---- what lives inside the bar ----
+  // Everything in the bar is an "item" at a dollar position. Each item owns the
+  // stretch of bar up to the next item (a zone) and its text stays centred on
+  // screen while you scroll through that stretch. Three kinds of items:
+  //   1. fixed: milestones, notes and the start of each spending block (data.js)
+  //   2. chapter cards: short explainers, spread evenly over their chapter's range
+  //   3. progress cards: computed "so far" lines that fill any long silence
+  var RH = D.rhythm || {};
+  var MAX_GAP = RH.maxGapPx || 6500;   // never longer than this without a new text
+  var MIN_GAP = RH.minGapPx || 2400;   // texts never closer than this
+  var all = [];
 
-    var zone = el('div', 'zone' + (s.type === 'milestone' ? ' milestone' : ''));
+  // spending blocks: dark backgrounds, plus an intro item at the start of each
+  var spendFrom = D.spendStart, spendTo = D.spendStart;
+  D.spending.forEach(function (s, i) {
+    var from = spendTo, to = spendTo + s.usd;
+    var seg = el('div', 'seg' + (i % 2 ? ' alt' : ''));
+    seg.style.left = Math.round(x(from)) + 'px';
+    seg.style.width = Math.max(2, Math.round(x(s.usd))) + 'px';
+    bar.appendChild(seg);
+    all.push({ at: from, kind: 'seg', s: s, fixed: true });
+    spread(s.cards || [], from, to, s.title);
+    spendTo = to;
+  });
+
+  D.story.concat(D.tail || []).forEach(function (s) { all.push({ at: s.at, kind: s.type, s: s, fixed: true }); });
+  (D.chapters || []).forEach(function (c) { spread(c.cards, c.from, c.to, c.title); });
+
+  function spread(cards, from, to, title) {
+    var n = cards.length;
+    cards.forEach(function (card, k) {
+      all.push({ at: from + (to - from) * (k + 1) / (n + 1), kind: 'card', s: card, kicker: title + ' · ' + (k + 1) + '/' + n });
+    });
+  }
+
+  // keep texts apart; fixed items keep their exact position
+  var minUsd = MIN_GAP * USD_PER_X;
+  for (var pass = 0; pass < 6; pass++) {
+    all.sort(function (a, b) { return a.at - b.at; });
+    var moved = false;
+    for (var i = 1; i < all.length; i++) {
+      if (all[i].at - all[i - 1].at >= minUsd) continue;
+      // a movable text goes after its neighbour; fixed ones never move
+      if (!all[i].fixed) { all[i].at = all[i - 1].at + minUsd; moved = true; }
+      else if (!all[i - 1].fixed) { all[i - 1].at = all[i].at + minUsd; moved = true; }
+    }
+    if (!moved) break;
+  }
+  all.sort(function (a, b) { return a.at - b.at; });
+
+  // fill long silences with progress cards
+  var region = function (at) { return at < spendFrom ? 'look' : at < spendTo ? 'spend' : 'tail'; };
+  var fillers = [], maxUsd = MAX_GAP * USD_PER_X;
+  var edges = [{ at: 0 }].concat(all).concat([{ at: D.netWorth }]);
+  for (var j = 1; j < edges.length; j++) {
+    var gap = edges[j].at - edges[j - 1].at;
+    var k = Math.ceil(gap / maxUsd) - 1;
+    for (var m = 1; m <= k; m++) fillers.push({ at: edges[j - 1].at + gap * m / (k + 1), kind: 'progress' });
+  }
+  all = all.concat(fillers).sort(function (a, b) { return a.at - b.at; });
+
+  // numbers for progress cards
+  var B = D.base || {};
+  function count(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + ' million';
+    if (n >= 1000) return Math.round(n).toLocaleString('en-US');
+    if (n >= 10) return String(Math.round(n));
+    return n.toFixed(1).replace(/\.0$/, '');
+  }
+  var turn = { look: 0, spend: 0, tail: 0 };
+  function progressTokens(at) {
+    var spentHere = Math.max(0, Math.min(at, spendTo) - spendFrom);
+    var seg = null, c = spendFrom;
+    D.spending.forEach(function (s) { if (at >= c && at < c + s.usd) seg = s; c += s.usd; });
+    tokens.soFar = short(at);
+    tokens.nWage = count(at / B.wage);
+    tokens.nLife = count(at / B.lifetime);
+    tokens.perPerson = money.format(Math.round(at / B.population / 100) * 100);
+    tokens.nOda = count(at / B.oda);
+    tokens.nHealth = count(at / B.health);
+    tokens.nMalaria = count(at / B.malariaGap);
+    tokens.saveYears = count(at / 1000 / 365);
+    tokens.gainDays = count(at / B.perDay);
+    tokens.spentHere = short(spentHere);
+    tokens.leftHere = short(D.netWorth - spentHere);
+    tokens.blockTitle = seg ? seg.title : '';
+  }
+
+  // draw every item as a zone
+  all.forEach(function (it, i) {
+    var s = it.s || {};
+    var next = all[i + 1] ? all[i + 1].at : D.netWorth;
+    var left = Math.round(x(it.at));
+    var width = Math.max(40, Math.round(x(next)) - left);
+    tokens.here = (it.at / D.netWorth * 100).toFixed(1) + '%';
+
+    var zone = el('div', 'zone zone-' + it.kind);
     zone.style.left = left + 'px';
     zone.style.width = width + 'px';
     var inner = el('div', 'zone-inner');
 
-    if (s.type === 'square') {
+    if (it.kind === 'progress') {
+      var r = region(it.at), list = (D.progress || {})[r] || [];
+      if (!list.length) return;
+      progressTokens(it.at);
+      var t = list[turn[r]++ % list.length];
+      inner.appendChild(el('div', 'zone-kicker', fill(r === 'look' ? '{soFar} in' : r === 'spend' ? 'Spent so far: {spentHere}' : 'Still his: {leftHere}')));
+      inner.appendChild(el('div', 'progress-text', fill(t)));
+    } else if (it.kind === 'seg') {
+      if (s.kicker) inner.appendChild(el('div', 'seg-kicker', fill(s.kicker)));
+      inner.appendChild(el('div', 'seg-title', fill(s.title)));
+      inner.appendChild(el('div', 'seg-cost', fill(s.cost || short(s.usd))));
+      if (s.html) inner.appendChild(el('div', 'seg-text', fill(s.html)));
+    } else if (it.kind === 'card') {
+      inner.appendChild(el('div', 'zone-kicker', fill(it.kicker)));
+      inner.appendChild(el('div', 'card-title', fill(s.title)));
+      inner.appendChild(el('div', 'note-text', fill(s.html)));
+    } else if (it.kind === 'square') {
       var sq = el('div', 'shape');
       var sd = side(s.usd);
       sq.style.width = sd + 'px';
@@ -110,30 +211,13 @@
       inner.appendChild(el('div', 'note-text', fill(s.label)));
       inner.appendChild(el('div', 'zone-value', fill(s.value || short(s.usd))));
     } else {
-      if (s.type === 'milestone') inner.appendChild(el('div', 'zone-kicker', 'You just passed'));
+      if (it.kind === 'milestone') inner.appendChild(el('div', 'zone-kicker', 'You just passed'));
       if (s.title) inner.appendChild(el('div', 'note-title', fill(s.title)));
-      if (s.type === 'milestone') inner.appendChild(el('div', 'zone-value', fill(s.value || short(s.at))));
+      if (it.kind === 'milestone') inner.appendChild(el('div', 'zone-value', fill(s.value || short(it.at))));
       if (s.html) inner.appendChild(el('div', 'note-text', fill(s.html)));
     }
     zone.appendChild(inner);
     bar.appendChild(zone);
-  });
-
-  // spending segments run back to back up to the end of the bar
-  var cursor = D.netWorth - spent - (D.spendTail || 0);
-  if (D.spendStart != null) cursor = D.spendStart;
-  D.spending.forEach(function (s, i) {
-    var seg = el('div', 'seg' + (i % 2 ? ' alt' : ''));
-    seg.style.left = Math.round(x(cursor)) + 'px';
-    seg.style.width = Math.max(2, Math.round(x(s.usd))) + 'px';
-    var inner = el('div', 'seg-inner');
-    if (s.kicker) inner.appendChild(el('div', 'seg-kicker', fill(s.kicker)));
-    inner.appendChild(el('div', 'seg-title', fill(s.title)));
-    inner.appendChild(el('div', 'seg-cost', fill(s.cost || short(s.usd))));
-    if (s.html) inner.appendChild(el('div', 'seg-text', fill(s.html)));
-    seg.appendChild(inner);
-    bar.appendChild(seg);
-    cursor += s.usd;
   });
 
   // ruler labels every $10 billion

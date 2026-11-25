@@ -152,7 +152,10 @@ a:hover { color: var(--accent); }
   position: absolute; top: 0; bottom: 0;
   overflow: clip;
 }
-.zone.milestone { border-left: 2px solid var(--paper); }
+.zone-milestone { border-left: 2px solid var(--paper); }
+.card-title { font-size: 24px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+.progress-text { font-size: 22px; line-height: 1.35; font-weight: 500; }
+.zone-progress .zone-kicker { opacity: 0.75; }
 .zone-inner, .seg-inner {
   position: sticky;
   left: 50%;
@@ -241,6 +244,8 @@ a:hover { color: var(--accent); }
   .lede { font-size: 18px; }
   .zone-inner, .seg-inner { width: calc(100vw - 48px); max-width: 340px; padding-top: 28px; }
   .note-title, .seg-title { font-size: 22px; }
+  .card-title { font-size: 20px; }
+  .progress-text { font-size: 18px; }
   .note-text, .seg-text { font-size: 15px; }
   .bar-name { font-size: 24px; left: 16px; margin-left: 16px; }
   .outro { width: 100vw; padding: 24px 16px; }
