@@ -218,8 +218,8 @@ a:hover { color: var(--accent); }
 .zone-progress .zone-kicker { opacity: 0.75; }
 .zone-inner, .seg-inner {
   position: sticky;
-  left: 50%;
-  transform: translateX(-50%);
+  /* centred on screen while the zone passes, but never pushed outside its zone */
+  left: max(24px, calc(50% - 240px));
   width: 480px;
   padding-top: 40px;
   display: flex; flex-direction: column; gap: 10px;
@@ -445,7 +445,7 @@ html.v { overflow-x: hidden; }
 .v .hud { background: var(--paper); }
 
 /* ---------- photos in the bar ---------- */
-.zone-inner.has-photo { width: 760px; flex-direction: row; gap: 28px; align-items: flex-start; }
+.zone-inner.has-photo { width: 760px; left: max(24px, calc(50% - 380px)); flex-direction: row; gap: 28px; align-items: flex-start; }
 .zone-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; flex: 1 1 auto; }
 .zone-photo { flex: 0 0 auto; background: var(--accent); overflow: hidden; }
 .zone-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
